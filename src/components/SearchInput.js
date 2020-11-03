@@ -47,12 +47,12 @@ const SearchInput = () => {
 
     return(
         <>
-        <SearchWrapper type={"text"}
-                       placeholder={"Search some recipie..."}
-                       value={searchValue}
-                       onChange={(e) => setSearchValue(e.target.value)}
-        />
-        <SubmitInput type={"submit"} value={"Search"} onClick={() => setRecipeName(searchValue)}/>
+            <SearchWrapper type={"text"}
+                           placeholder={"Search some recipie..."}
+                           value={searchValue}
+                           onChange={(e) => setSearchValue(e.target.value)}
+            />
+            <SubmitInput type={"submit"} value={"Search"} onClick={() => setRecipeName(searchValue)}/>
         </>
     );
 };

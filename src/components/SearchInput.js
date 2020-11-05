@@ -1,6 +1,9 @@
 import styled from 'styled-components';
-import {useEffect, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {searchMealsByName} from "../api/recipies-api";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {AppContext} from "../api/context";
 
 const SearchWrapper = styled('input')`
     padding: 5px 15px;
@@ -10,6 +13,7 @@ const SearchWrapper = styled('input')`
     margin: auto;
     border: none;
     border-radius: 5px;
+    overflow: hidden;
     
     &:focus{
         outline:none;
@@ -17,14 +21,30 @@ const SearchWrapper = styled('input')`
     }
 `;
 
-const SubmitInput = styled('input')`
-    padding: 5px 15px;
+const SubmitInput = styled('div')`   
     color: #3f3f3f;
     background-color: #fff;
-    width: 100xp;
+    width: 50px;
     margin: auto;
     border: none;
     border-radius: 5px;
+    height: 25px;
+    display: inline-block;
+    left: -50px;
+    position: relative;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    cursor: pointer;
+    
+    &:hover{
+      background-color: #f4f2f2;
+    }
+    
+    & svg{
+        position: relative;
+        top: 2px;
+        color: #3f3f3f;
+    }
     
     &:focus{
         outline:none;
@@ -35,11 +55,12 @@ const SubmitInput = styled('input')`
 const SearchInput = () => {
     const [searchValue, setSearchValue] = useState("");
     const [recipeName, setRecipeName] = useState("");
+    const context = useContext(AppContext);
 
     useEffect(() => {
         if(recipeName){
             searchMealsByName(recipeName)
-            .then((meals) => console.log(meals));
+            .then((meals) => context.setMeals(meals));
         }
     },[recipeName]);
 
@@ -52,7 +73,10 @@ const SearchInput = () => {
                            value={searchValue}
                            onChange={(e) => setSearchValue(e.target.value)}
             />
-            <SubmitInput type={"submit"} value={"Search"} onClick={() => setRecipeName(searchValue)}/>
+            <SubmitInput>
+                <FontAwesomeIcon icon={faSearch} onClick={() => setRecipeName(searchValue)}/>
+            </SubmitInput>
+
         </>
     );
 };

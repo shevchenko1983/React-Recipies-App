@@ -7,7 +7,8 @@ const ProductItemsWrapper = styled('div')`
     justify-content: space-between;
 `;
 
-const TopProductItemsWrapper = () => {
+const TopProductItemsWrapper = ({meals}) => {
+    console.log(meals);
     return(
         <ProductItemsWrapper className={'top-products__item'}>
 

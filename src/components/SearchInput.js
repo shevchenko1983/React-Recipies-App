@@ -9,11 +9,13 @@ const SearchWrapper = styled('input')`
     padding: 5px 15px;
     color: #3f3f3f;
     background-color: #ffc0cb82;
-    width: calc(50% + 50px);
+    width: 100%;
+    max-width: 330px;
     margin: auto;
     border: none;
-    border-radius: 5px;
+    border-radius: 5px;    
     overflow: hidden;
+    
     
     &:focus{
         outline:none;
@@ -30,11 +32,13 @@ const SubmitInput = styled('div')`
     border-radius: 5px;
     height: 26px;
     display: inline-block;
-    left: -50px;
-    position: relative;
+    right: 0px;
+    top: 0px;
+    position: absolute;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     cursor: pointer;
+    text-align: center;
     
     &:hover{
       background-color: #f4f2f2;
@@ -67,7 +71,15 @@ const SearchInput = () => {
     //console.log(recipeName);
 
     return(
-        <>
+        <div className={"search"} style={{
+            display: "inline-block",
+            width: "330px",
+            maxWidth: "50%",
+            position: "relative",
+            textAlign: "left",
+            borderTopRightRadius: "5px",
+            borderBottomRightRadius: "5px"
+        }}>
             <SearchWrapper type={"text"}
                            placeholder={"Search some recipie..."}
                            value={searchValue}
@@ -77,7 +89,7 @@ const SearchInput = () => {
                 <FontAwesomeIcon icon={faSearch} onClick={() => setRecipeName(searchValue)}/>
             </SubmitInput>
 
-        </>
+        </div>
     );
 };
 

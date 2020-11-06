@@ -9,7 +9,7 @@ const SearchWrapper = styled('input')`
     padding: 5px 15px;
     color: #3f3f3f;
     background-color: #ffc0cb82;
-    width: 50%;
+    width: calc(50% + 50px);
     margin: auto;
     border: none;
     border-radius: 5px;
@@ -28,7 +28,7 @@ const SubmitInput = styled('div')`
     margin: auto;
     border: none;
     border-radius: 5px;
-    height: 25px;
+    height: 26px;
     display: inline-block;
     left: -50px;
     position: relative;
@@ -60,7 +60,7 @@ const SearchInput = () => {
     useEffect(() => {
         if(recipeName){
             searchMealsByName(recipeName)
-            .then((meals) => context.setMeals(meals));
+            .then((meals) => context.setMealsListBySearch(meals));
         }
     },[recipeName]);
 

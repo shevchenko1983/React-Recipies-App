@@ -78,7 +78,8 @@ const SearchInput = () => {
             position: "relative",
             textAlign: "left",
             borderTopRightRadius: "5px",
-            borderBottomRightRadius: "5px"
+            borderBottomRightRadius: "5px",
+            overflow: "hidden"
         }}>
             <SearchWrapper type={"text"}
                            placeholder={"Search some recipie..."}

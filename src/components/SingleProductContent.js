@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {useHistory} from "react-router";
 import {getMealById} from "../api/recipies-api";
 import styled from 'styled-components';
+import {AppContext} from "../api/context";
+
 
 const SingleProductWrapper = styled('div')`
     & img{
@@ -9,27 +11,17 @@ const SingleProductWrapper = styled('div')`
         max-width: 70%;
         margin-bottom: 20px;
     }
+    & ol li{       
+        text-align: left;
+        text-transform: capitalize;
+    }
 `;
 
 const SingleProductContent = () => {
     const [currMeal, setCurrMeal] = useState({});
+    const [parsedData, setParsedData] = useState({});
     let mealId = useHistory().location.pathname.split("/")[2];
-
-    // const getCurrentData = (currMeal) => {
-    //
-    //     let meal = Object.values(currMeal)[0];
-    //     let {mealTitle = meal.strMeal,
-    //         mealImage = meal.strMealThumb,
-    //         instructions = meal.strInstructions,
-    //
-    //     } = meal;
-    //     const ingredients = [];
-    //     for(let elem in meal){
-    //         if(elem.includes("strIngredient")){
-    //             ingredients.push(elem);
-    //         }
-    //     }
-    // };
+    let context = useContext(AppContext);
 
     //Check if has mealId
     useEffect(() => {
@@ -43,18 +35,23 @@ const SingleProductContent = () => {
     //check if currMeal is not empty
     useEffect(() => {
         if(Object.entries(currMeal).length > 0){
-            console.log("run")
-            //getCurrentData(currMeal);
+            setParsedData(context.parseSingleMealData(currMeal));
         }
     },[Object.entries(currMeal).length]);
 
-    console.log(currMeal);
+    console.log(currMeal, parsedData);
     return(
         <SingleProductWrapper>
-            { Object.entries(currMeal).length > 0 &&
+            { Object.entries(parsedData).length > 0 &&
                 <>
-                    <h2>{currMeal[0].strMeal}</h2>
-                    <img src={currMeal[0].strMealThumb} alt=""/>
+                    <h2>{parsedData.mealTitle}</h2>
+                    <img src={parsedData.mealImage} alt=""/>
+                    <p>Engridients: </p>
+                    <ol className="engridients">
+                        {parsedData.ingredients.map((item, index) => {
+                            return <li key={index}>{item}</li>
+                        })}
+                    </ol>
                 </>}
         </SingleProductWrapper>
     );

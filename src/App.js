@@ -20,7 +20,7 @@ const parseSingleMealData = (singleMealData) => {
     //get ingredients List
     const ingredients = [];
        for(let elem in meal){
-          if(elem.includes("strIngredient") && meal[elem] !== null){
+          if(elem.includes("strIngredient") && meal[elem]){
               ingredients.push(meal[elem]);
           }
     };

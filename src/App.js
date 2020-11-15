@@ -15,6 +15,7 @@ const parseSingleMealData = (singleMealData) => {
     let {mealTitle = meal.strMeal,
          mealImage = meal.strMealThumb,
          instructions = meal.strInstructions,
+        categoryMeal = meal.strCategory,
     } = meal;
 
     //get ingredients List
@@ -29,7 +30,8 @@ const parseSingleMealData = (singleMealData) => {
         mealTitle,
         mealImage,
         instructions,
-        ingredients
+        ingredients,
+        categoryMeal
     }
 };
 

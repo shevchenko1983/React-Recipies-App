@@ -9,12 +9,28 @@ import ContentText from "./ContentText";
 const SingleProductWrapper = styled('div')`
     & .product_options{
         padding: 0px 15px;
-        display: flex;        
+        display: flex; 
+        position: relative;    
+        
+        & .product_category{
+            position: absolute;
+            background-color: antiquewhite;
+            padding: 5px 10px;
+            top: 10px;
+            border-top-right-radius: 2px;
+            border-bottom-right-radius: 2px;
+            cursor: pointer;
+            
+            &:hover{
+                color: #cdc0ff;
+            }
+        }   
     }
     & img{
         width: 100%;
         max-width: 50%;
         margin-bottom: 20px;
+        border-radius: 5px;
     }
     & ol{
         margin: 0;
@@ -60,6 +76,7 @@ const SingleProductContent = () => {
                     <h2>{parsedData.mealTitle}</h2>
                     <div className="product_options">
                         <img src={parsedData.mealImage} alt=""/>
+                        <span className={"product_category"}>{parsedData.categoryMeal}</span>
                         <ol className="engridients">
                             <p>Engridients: </p>
                             {parsedData.ingredients.map((item, index) => {

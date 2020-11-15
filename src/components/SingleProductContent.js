@@ -3,18 +3,31 @@ import {useHistory} from "react-router";
 import {getMealById} from "../api/recipies-api";
 import styled from 'styled-components';
 import {AppContext} from "../api/context";
+import ContentText from "./ContentText";
 
 
 const SingleProductWrapper = styled('div')`
+    & .product_options{
+        padding: 0px 15px;
+        display: flex;        
+    }
     & img{
         width: 100%;
-        max-width: 70%;
+        max-width: 50%;
         margin-bottom: 20px;
     }
-    & ol li{       
-        text-align: left;
-        text-transform: capitalize;
+    & ol{
+        margin: 0;
+        & p{
+            margin: 0;
+            font-weight: 600;
+        }
+        & li{       
+            text-align: left;
+            text-transform: capitalize;
+        }
     }
+   
 `;
 
 const SingleProductContent = () => {
@@ -45,13 +58,17 @@ const SingleProductContent = () => {
             { Object.entries(parsedData).length > 0 &&
                 <>
                     <h2>{parsedData.mealTitle}</h2>
-                    <img src={parsedData.mealImage} alt=""/>
-                    <p>Engridients: </p>
-                    <ol className="engridients">
-                        {parsedData.ingredients.map((item, index) => {
-                            return <li key={index}>{item}</li>
-                        })}
-                    </ol>
+                    <div className="product_options">
+                        <img src={parsedData.mealImage} alt=""/>
+                        <ol className="engridients">
+                            <p>Engridients: </p>
+                            {parsedData.ingredients.map((item, index) => {
+                                return <li key={index}>{item}</li>
+                            })}
+                        </ol>
+                    </div>
+                    <h3>How to do it?!...</h3>
+                    <ContentText text={parsedData.instructions}/>
                 </>}
         </SingleProductWrapper>
     );

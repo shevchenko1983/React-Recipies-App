@@ -4,7 +4,7 @@ import TopProductItemsWrapper from "./components/TopProductItemsWrapper";
 import {AppContext} from "./api/context";
 import React, {useEffect, useState} from "react";
 import ContentProductItemsWrapper from "./components/ContentProductItemsWrapper";
-import {getMealByRandom} from "./api/recipies-api";
+import {getCategoryMealsList, getMealByRandom} from "./api/recipies-api";
 import SingleProductContent from "./components/SingleProductContent";
 import {SINGLE_RECIPIE_PATH} from "./api/config";
 import {Route, withRouter} from "react-router";
@@ -35,6 +35,11 @@ const parseSingleMealData = (singleMealData) => {
     }
 };
 
+
+
+
+
+
 function App() {
   const [mealsListBySearch, setMealsListBySearch] = useState([]);
   const [mealsListByDefault, setMealsListByDefault] = useState([]);
@@ -46,11 +51,24 @@ function App() {
       }
   },[mealsListByDefault, mealsListBySearch]);
 
+
+
+   //get Category MealsList
+  const getCategoryList = (categoryName) => {
+      getCategoryMealsList(categoryName).then((meal) => setMealsListBySearch([meal]));
+      //setMealsListBySearch([]);
+      //window.location.href = "/";
+  };
+    console.log("rerender");
+    console.log(mealsListBySearch, mealsListByDefault);
+
   return (
     <div className="App">
         <AppContext.Provider value={{setMealsListBySearch,
                                      setMealsListByDefault,
-                                     parseSingleMealData}}>
+                                     parseSingleMealData,
+                                     getCategoryList
+        }}>
             <Header/>
             {/*{If mealsListBySearch is empty -> showing mealsListByDefault}*/}
             <TopProductItemsWrapper meals={mealsListBySearch.length > 0 ? mealsListBySearch : mealsListByDefault}/>

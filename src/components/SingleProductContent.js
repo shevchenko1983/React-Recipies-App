@@ -68,7 +68,7 @@ const SingleProductContent = () => {
         }
     },[Object.entries(currMeal).length]);
 
-    console.log(currMeal, parsedData);
+    //console.log(currMeal, parsedData);
     return(
         <SingleProductWrapper>
             { Object.entries(parsedData).length > 0 &&
@@ -76,7 +76,10 @@ const SingleProductContent = () => {
                     <h2>{parsedData.mealTitle}</h2>
                     <div className="product_options">
                         <img src={parsedData.mealImage} alt=""/>
-                        <span className={"product_category"}>{parsedData.categoryMeal}</span>
+                        <span className={"product_category"}
+                              onClick={() => context.getCategoryList(parsedData.categoryMeal)}>
+                            {parsedData.categoryMeal}
+                        </span>
                         <ol className="engridients">
                             <p>Engridients: </p>
                             {parsedData.ingredients.map((item, index) => {

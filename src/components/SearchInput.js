@@ -68,7 +68,7 @@ const SearchInput = () => {
         }
     },[recipeName]);
 
-    //console.log(recipeName);
+    console.log(recipeName);
 
     return(
         <div className={"search"} style={{

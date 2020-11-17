@@ -37,9 +37,6 @@ const parseSingleMealData = (singleMealData) => {
 
 
 
-
-
-
 function App() {
   const [mealsListBySearch, setMealsListBySearch] = useState([]);
   const [mealsListByDefault, setMealsListByDefault] = useState([]);
@@ -49,18 +46,18 @@ function App() {
       if(mealsListByDefault.length < 5 && mealsListBySearch.length === 0){
           getMealByRandom().then((meal) => setMealsListByDefault([...mealsListByDefault, meal])) ;
       }
+
   },[mealsListByDefault, mealsListBySearch]);
 
 
 
    //get Category MealsList
   const getCategoryList = (categoryName) => {
-      getCategoryMealsList(categoryName).then((meal) => setMealsListBySearch([meal]));
-      //setMealsListBySearch([]);
-      //window.location.href = "/";
+      getCategoryMealsList(categoryName)
+      .then((meal) => setMealsListBySearch([meal]));
   };
-    console.log("rerender");
-    console.log(mealsListBySearch, mealsListByDefault);
+
+  console.log(mealsListBySearch, mealsListByDefault);
 
   return (
     <div className="App">

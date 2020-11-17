@@ -4,6 +4,8 @@ import {getMealById} from "../api/recipies-api";
 import styled from 'styled-components';
 import {AppContext} from "../api/context";
 import ContentText from "./ContentText";
+import {NavLink} from "react-router-dom";
+import {SINGLE_RECIPIE_PATH} from "../api/config";
 
 
 const SingleProductWrapper = styled('div')`
@@ -76,10 +78,14 @@ const SingleProductContent = () => {
                     <h2>{parsedData.mealTitle}</h2>
                     <div className="product_options">
                         <img src={parsedData.mealImage} alt=""/>
-                        <span className={"product_category"}
-                              onClick={() => context.getCategoryList(parsedData.categoryMeal)}>
+                        <NavLink className={"product_category"}
+                                 onClick={() => context.getCategoryList(parsedData.categoryMeal)}
+                                 to={{
+                                     pathname: "/"
+                                 }}
+                        >
                             {parsedData.categoryMeal}
-                        </span>
+                        </NavLink>
                         <ol className="engridients">
                             <p>Engridients: </p>
                             {parsedData.ingredients.map((item, index) => {

@@ -63,12 +63,11 @@ const SearchInput = () => {
 
     useEffect(() => {
         if(recipeName){
-            searchMealsByName(recipeName)
-            .then((meals) => context.setMealsListBySearch(meals));
+            context.getMealsBySearch(recipeName);
         }
     },[recipeName]);
 
-    console.log(recipeName);
+    //console.log(recipeName);
 
     return(
         <div className={"search"} style={{

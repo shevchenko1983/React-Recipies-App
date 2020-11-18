@@ -14,6 +14,13 @@ const ProductItem = styled('div')`
         background-position: center;
         border-radius: 10px;
         margin: auto;
+        overflow: hidden;
+        transition: all 0.3s ease-in-out;
+        
+        &:hover{
+            transform: scale(1.1);
+            transition: all 0.5s ease-in-out;
+        }
     }
 `;
 
@@ -22,15 +29,16 @@ const ContentProductItem = ({product}) => {
            title = product.strMeal,
            id = product.idMeal,
     } = product;
-    console.log(product);
+    //console.log(product);
+
     return(
       <NavLink to={{
           pathname: SINGLE_RECIPIE_PATH + id
       }}>
-      <ProductItem className={"content-product__item"}>
-          <h3>{title}</h3>
-          <div className="content-product__item-image" style={{backgroundImage: `url(${image})`}}/>
-      </ProductItem>
+          <ProductItem className={"content-product__item"}>
+              <h3>{title}</h3>
+              <div className="content-product__item-image" style={{backgroundImage: `url(${image})`}}/>
+          </ProductItem>
       </NavLink>
     );
 };

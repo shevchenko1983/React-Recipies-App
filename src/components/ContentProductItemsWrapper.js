@@ -4,14 +4,24 @@ import ContentProductItem from "./ContentProductItem";
 
 const ProductItemsWrapper = styled('div')`
     padding: 20px;
-    display: flex;
-    flex-flow: row wrap;
+    
+    & h3{
+       text-transform: capitalize;    
+    }  
+    
+    & .content-products__item{
+        display: flex;
+        flex-flow: row wrap;
+        // overflow: hidden;
+    }   
     
     & a{
         max-width: 45%;
         flex-basis: 50%;
         align-self: flex-end;
         margin: 10px;
+        color:#000;
+        text-decoration: none;
     }  
     
     @media (max-width: 767px){
@@ -24,14 +34,18 @@ const ProductItemsWrapper = styled('div')`
     }
 `;
 
-const TopProductItemsWrapper = ({meals}) => {
+const TopProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
     const mealsArr = [];
     meals.forEach((item) => mealsArr.push(...item.meals));
+    let title =  showCategoryTitle ? categoryTitle + ":" : "Top Recipies: ";
     return(
-        <ProductItemsWrapper className={'content-products__item'}>
-            {mealsArr.map((item, index) => {
-                return <ContentProductItem product={item} key={index}/>
-            })}
+        <ProductItemsWrapper>
+            <h3>{title}</h3>
+            <div className="content-products__item">
+                {mealsArr.map((item, index) => {
+                    return <ContentProductItem product={item} key={index}/>
+                })}
+            </div>
         </ProductItemsWrapper>
     );
 };

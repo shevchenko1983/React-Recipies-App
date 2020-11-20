@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import {NavLink} from "react-router-dom";
 import {SINGLE_RECIPIE_PATH} from "../api/config";
@@ -16,6 +17,7 @@ const ProductItem = styled('div')`
         margin: auto;
         overflow: hidden;
         transition: all 0.3s ease-in-out;
+        box-shadow: 0px 5px 7px #c571b76b;
         
         &:hover{
             transform: scale(1.1);

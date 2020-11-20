@@ -1,4 +1,8 @@
-import {GET_CATEGORY_MEALS_LIST, GET_MEAL_BY_ID, GET_MEAL_BY_RANDOM, SEARCH_MEALS_BY_NAME} from "./config";
+import {GET_CATEGORY_MEALS_LIST,
+        GET_MEAL_BY_ID,
+        GET_MEAL_BY_RANDOM,
+        SEARCH_MEALS_BY_NAME
+} from "./config";
 
 //get Meal be searching
 export const searchMealsByName = async (searchValue) => {

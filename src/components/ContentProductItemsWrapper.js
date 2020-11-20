@@ -1,6 +1,6 @@
+import React from 'react';
 import styled from 'styled-components';
 import ContentProductItem from "./ContentProductItem";
-import {useEffect} from "react";
 
 
 const ProductItemsWrapper = styled('div')`

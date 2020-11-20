@@ -1,9 +1,10 @@
+import React from 'react';
 import styled from 'styled-components';
 import {useContext, useEffect, useState} from "react";
-import {searchMealsByName} from "../api/recipies-api";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch} from "@fortawesome/free-solid-svg-icons";
 import {AppContext} from "../api/context";
+import {NavLink} from "react-router-dom";
 
 const SearchWrapper = styled('input')`
     padding: 5px 15px;
@@ -47,7 +48,7 @@ const SubmitInput = styled('div')`
     & svg{
         position: relative;
         top: 2px;
-        color: #3f3f3f;
+        color: #3f3f3fa1;
     }
     
     &:focus{
@@ -86,7 +87,9 @@ const SearchInput = () => {
                            onChange={(e) => setSearchValue(e.target.value)}
             />
             <SubmitInput>
-                <FontAwesomeIcon icon={faSearch} onClick={() => setRecipeName(searchValue)}/>
+                <NavLink to={{pathname: "/"}}>
+                    <FontAwesomeIcon icon={faSearch} onClick={() => setRecipeName(searchValue)}/>
+                </NavLink>
             </SubmitInput>
 
         </div>

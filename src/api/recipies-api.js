@@ -1,7 +1,9 @@
-import {GET_CATEGORY_MEALS_LIST,
-        GET_MEAL_BY_ID,
-        GET_MEAL_BY_RANDOM,
-        SEARCH_MEALS_BY_NAME
+import {
+    GET_ALL_CATEGORIES_MEALS_LIST,
+    GET_CATEGORY_MEALS_LIST_BY_CATEGORY_NAME,
+    GET_MEAL_BY_ID,
+    GET_MEAL_BY_RANDOM,
+    SEARCH_MEALS_BY_NAME
 } from "./config";
 
 //get Meal be searching
@@ -34,10 +36,20 @@ export const getMealById = async (mealId) => {
     }
 }
 
-//get Category Meals List
-export const getCategoryMealsList = async (categoryName) => {
+//get Category Meals List By Category Name
+export const getCategoryMealsListByCategoryName = async (categoryName) => {
     try{
-        let response = await fetch(GET_CATEGORY_MEALS_LIST + categoryName);
+        let response = await fetch(GET_CATEGORY_MEALS_LIST_BY_CATEGORY_NAME + categoryName);
+        return await response.json();
+    }catch (e) {
+        console.error(e.message);
+    }
+}
+
+//get ALL Categories Meals List
+export const getAllCategoriesMeals = async () => {
+    try{
+        let response = await fetch(GET_ALL_CATEGORIES_MEALS_LIST);
         return await response.json();
     }catch (e) {
         console.error(e.message);

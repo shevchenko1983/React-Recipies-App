@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {AppContext} from "../api/context";
 import ContentText from "./ContentText";
 import {NavLink} from "react-router-dom";
-import {SINGLE_RECIPIE_PATH} from "../api/config";
+
 
 
 const SingleProductWrapper = styled('div')`

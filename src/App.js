@@ -1,10 +1,14 @@
 import './App.css';
 import Header from "./components/Header";
-import TopProductItemsWrapper from "./components/TopProductItemsWrapper";
+import TopProductItemsWrapper from "./components/top-components/TopProductItemsWrapper";
 import {AppContext} from "./api/context";
 import React, {useEffect, useState} from "react";
 import ContentProductItemsWrapper from "./components/ContentProductItemsWrapper";
-import {getCategoryMealsList, getMealByRandom, searchMealsByName} from "./api/recipies-api";
+import {
+    getCategoryMealsListByCategoryName,
+    getMealByRandom,
+    searchMealsByName
+} from "./api/recipies-api";
 import SingleProductContent from "./components/SingleProductContent";
 import {SINGLE_RECIPIE_PATH} from "./api/config";
 import {Route, withRouter} from "react-router";
@@ -62,7 +66,7 @@ function App() {
 
    //get Category MealsList
   const getCategoryList = (categoryName) => {
-      getCategoryMealsList(categoryName)
+      getCategoryMealsListByCategoryName(categoryName)
       .then((meal) => {
           setMealsListBySearch([meal]);
           setShowCategoryProducts({category: categoryName, status: true});
@@ -79,8 +83,8 @@ function App() {
                                      getCategoryList
         }}>
             <Header/>
-            {/*{If mealsListBySearch is empty -> showing mealsListByDefault}*/}
-            <TopProductItemsWrapper meals={mealsListBySearch.length > 0 ? mealsListBySearch : mealsListByDefault}/>
+            {/*{Show meals by categories}*/}
+            <TopProductItemsWrapper />
             {/*//Show by default ContentProductItemsWrapper with a list of the products*/}
             <Route exact path="/" render={() => <ContentProductItemsWrapper
                                                 meals={mealsListBySearch.length > 0 ? mealsListBySearch : mealsListByDefault}

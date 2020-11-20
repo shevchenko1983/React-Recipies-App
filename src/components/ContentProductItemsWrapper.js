@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import ContentProductItem from "./ContentProductItem";
+import {useEffect} from "react";
 
 
 const ProductItemsWrapper = styled('div')`
@@ -34,13 +35,14 @@ const ProductItemsWrapper = styled('div')`
     }
 `;
 
-const TopProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
+const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
     const mealsArr = [];
-    meals.forEach((item) => mealsArr.push(...item.meals));
+    meals.forEach((item) => item.meals && mealsArr.push(...item.meals));
     let title =  showCategoryTitle ? categoryTitle + ":" : "Top Recipies: ";
     return(
+
         <ProductItemsWrapper>
-            <h3>{title}</h3>
+            <h3>{mealsArr.length > 0 ? title : "No Results..."}</h3>
             <div className="content-products__item">
                 {mealsArr.map((item, index) => {
                     return <ContentProductItem product={item} key={index}/>
@@ -50,4 +52,4 @@ const TopProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
     );
 };
 
-export default TopProductItemsWrapper;
+export default ContentProductItemsWrapper;

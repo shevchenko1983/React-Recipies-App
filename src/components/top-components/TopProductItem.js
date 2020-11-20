@@ -13,6 +13,15 @@ const Item = styled('div')`
     background-repeat: no-repeat;
     box-shadow: 0px 4px 3px #c571b76b;
     margin: 0px 5px;
+    position: relative;
+    
+    & p{
+        position: absolute;
+        top: -42px;
+        left: 0;
+        right: 0;
+        text-decoration: none;
+    }
 `;
 
 const TopProductItem = ({product}) => {
@@ -26,6 +35,7 @@ const TopProductItem = ({product}) => {
             <Item className={"top-product__item"} style={{
                 backgroundImage: `url(${image})`
             }}>
+                <p>{title}</p>
             </Item>
         </NavLink>
     );

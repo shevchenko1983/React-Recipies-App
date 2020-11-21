@@ -16,22 +16,13 @@ const ProductItemsWrapper = styled('div')`
         // overflow: hidden;
     }   
     
-    & a{
-        max-width: 45%;
-        flex-basis: 50%;
-        align-self: flex-end;
-        margin: 10px;
+    & a{       
         color:#000;
-        text-decoration: none;
+        text-decoration: none;        
     }  
     
     @media (max-width: 767px){
-        flex-flow: column nowrap;
-         & a{
-            max-width: 100%;
-            flex-basis: 100%;
-            align-self: auto;
-         }
+        flex-flow: column nowrap;       
     }
 `;
 

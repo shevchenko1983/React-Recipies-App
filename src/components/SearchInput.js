@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {useContext, useEffect, useState} from "react";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {BiSearchAlt2} from 'react-icons/bi';
 import {AppContext} from "../api/context";
 import {NavLink} from "react-router-dom";
 
@@ -47,8 +46,10 @@ const SubmitInput = styled('div')`
     
     & svg{
         position: relative;
-        top: 2px;
+        top: 4px;
         color: #3f3f3fa1;
+        width: 50px;
+        height: 20px;
     }
     
     &:focus{
@@ -88,7 +89,7 @@ const SearchInput = () => {
             />
             <SubmitInput>
                 <NavLink to={{pathname: "/"}}>
-                    <FontAwesomeIcon icon={faSearch} onClick={() => setRecipeName(searchValue)}/>
+                    <BiSearchAlt2 onClick={() => setRecipeName(searchValue)}/>
                 </NavLink>
             </SubmitInput>
 

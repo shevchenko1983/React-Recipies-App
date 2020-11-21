@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./components/Header";
 import TopProductItemsWrapper from "./components/top-components/TopProductItemsWrapper";
-import {AppContext} from "./api/context";
+import {AppContext, onSendProductToFavorites, parseSingleMealData} from "./api/context";
 import React, {useEffect, useState} from "react";
 import ContentProductItemsWrapper from "./components/ContentProductItemsWrapper";
 import {
@@ -12,32 +12,6 @@ import {
 import SingleProductContent from "./components/SingleProductContent";
 import {SINGLE_RECIPIE_PATH} from "./api/config";
 import {Route, withRouter} from "react-router";
-
-
-const parseSingleMealData = (singleMealData) => {
-    let meal = Object.values(singleMealData)[0];
-    let {mealTitle = meal.strMeal,
-         mealImage = meal.strMealThumb,
-         instructions = meal.strInstructions,
-        categoryMeal = meal.strCategory,
-    } = meal;
-
-    //get ingredients List
-    const ingredients = [];
-       for(let elem in meal){
-          if(elem.includes("strIngredient") && meal[elem]){
-              ingredients.push(meal[elem]);
-          }
-    };
-
-    return {
-        mealTitle,
-        mealImage,
-        instructions,
-        ingredients,
-        categoryMeal
-    }
-};
 
 
 
@@ -77,11 +51,14 @@ function App() {
 
   return (
     <div className="App">
-        <AppContext.Provider value={{getMealsBySearch,
-                                     setMealsListByDefault,
-                                     parseSingleMealData,
-                                     getCategoryList
-        }}>
+        <AppContext.Provider
+            value={{getMealsBySearch,
+                    setMealsListByDefault,
+                    parseSingleMealData,
+                    getCategoryList,
+                    onSendProductToFavorites
+            }}
+        >
             <Header/>
             {/*{Show meals by categories}*/}
             <TopProductItemsWrapper />

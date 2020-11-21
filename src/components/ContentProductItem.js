@@ -19,6 +19,8 @@ const ProductItem = styled('div')`
     & .image-holder{
         overflow: hidden;
         border-radius: 10px;
+        max-width: 330px;
+        margin: auto;
     }
     
     & .content-product__item-image{
@@ -42,6 +44,10 @@ const ProductItem = styled('div')`
     & .product-item__image-panel{
         position: absolute;
         background-color: #f8e3f0e3;
+        max-width: 330px;
+        left: 0;
+        right: 0;
+        margin: auto;
         bottom: 0;
         width: 100%;
         padding: 5px 0px;

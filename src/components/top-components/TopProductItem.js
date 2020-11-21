@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from "styled-components";
 import {NavLink} from "react-router-dom";
+import {AppContext} from "../../api/context";
 
 
 const Item = styled('div')`
@@ -25,6 +26,7 @@ const Item = styled('div')`
 `;
 
 const TopProductItem = ({product}) => {
+    const context = useContext(AppContext);
     let {id = product.idCategory,
          title = product.strCategory,
          image = product.strCategoryThumb,
@@ -32,9 +34,10 @@ const TopProductItem = ({product}) => {
 
     return(
         <NavLink to={{pathname: '/'}}>
-            <Item className={"top-product__item"} style={{
-                backgroundImage: `url(${image})`
-            }}>
+            <Item className={"top-product__item"}
+                  style={{backgroundImage: `url(${image})`}}
+                  onClick={() => context.getCategoryList(title)}
+            >
                 <p>{title}</p>
             </Item>
         </NavLink>

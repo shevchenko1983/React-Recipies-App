@@ -8,3 +8,7 @@ export const GET_ALL_CATEGORIES_MEALS_LIST = 'https://www.themealdb.com/api/json
 
 //App Routing
 export const SINGLE_RECIPIE_PATH = '/recipie/';
+
+
+//Keys in LocalStorage
+export const FAVORITES = 'favoriteMeals';

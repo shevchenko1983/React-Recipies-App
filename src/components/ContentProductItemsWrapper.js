@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import ContentProductItem from "./ContentProductItem";
 
 
+
 const ProductItemsWrapper = styled('div')`
     padding: 20px;
     
@@ -27,6 +28,7 @@ const ProductItemsWrapper = styled('div')`
 `;
 
 const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
+
     const mealsArr = [];
     meals.forEach((item) => item.meals && mealsArr.push(...item.meals));
     let title =  showCategoryTitle ? categoryTitle + ":" : "Top Recipies: ";

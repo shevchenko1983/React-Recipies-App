@@ -1,10 +1,11 @@
-import React, {useContext} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {AiOutlineHeart} from 'react-icons/ai';
+import {GiHeartWings} from 'react-icons/gi';
 import {NavLink} from "react-router-dom";
 import {SINGLE_RECIPIE_PATH} from "../api/config";
 import {AppContext} from "../api/context";
-import {useHistory} from "react-router";
+
 
 const ProductItem = styled('div')`  
     max-width: 45%;
@@ -51,6 +52,8 @@ const ProductItem = styled('div')`
           & svg{              
             padding-right: 15px;
             color: #f17979;
+            cursor: pointer;
+            font-size: 18px;
                 
             &:hover{
               transform: scale(1.3);
@@ -69,7 +72,15 @@ const ProductItem = styled('div')`
 
 const ContentProductItem = ({product}) => {
     const context = useContext(AppContext);
-    const history = useHistory();
+    const [favoritesMealsId, setFavoritesMealsId] = useState([]);
+    const [favoriteMeal, setFavoriteMeal] = useState(false);
+
+    useEffect(() => {
+        if(favoritesMealsId.includes(product.idMeal)){
+            setFavoriteMeal(true);
+        }
+    },[favoritesMealsId]);
+
 
     const {image = product.strMealThumb,
            title = product.strMeal,
@@ -88,7 +99,12 @@ const ContentProductItem = ({product}) => {
                   </div>
               </NavLink>
               <div className="product-item__image-panel">
-                  <AiOutlineHeart onClick={() => context.onSendProductToFavorites(product, history)}/>
+                  {favoriteMeal ?
+                      <GiHeartWings/>
+                      :
+                      <AiOutlineHeart
+                          onClick={() => setFavoritesMealsId([...context.onSendProductToFavorites(product)])}/>
+                  }
               </div>
           </ProductItem>
     );

@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./components/Header";
 import TopProductItemsWrapper from "./components/top-components/TopProductItemsWrapper";
-import {AppContext, onSendProductToFavorites, parseSingleMealData} from "./api/context";
+import {AppContext, getFavoritesMealsId, onSendProductToFavorites, parseSingleMealData} from "./api/context";
 import React, {useEffect, useState} from "react";
 import ContentProductItemsWrapper from "./components/ContentProductItemsWrapper";
 import {
@@ -56,7 +56,7 @@ function App() {
                     setMealsListByDefault,
                     parseSingleMealData,
                     getCategoryList,
-                    onSendProductToFavorites
+                    onSendProductToFavorites,
             }}
         >
             <Header/>

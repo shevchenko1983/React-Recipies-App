@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {AiOutlineHeart} from 'react-icons/ai';
 import {GiHeartWings} from 'react-icons/gi';
 import {NavLink} from "react-router-dom";
-import {SINGLE_RECIPIE_PATH} from "../api/config";
+import {FAVORITES, SINGLE_RECIPIE_PATH} from "../api/config";
 import {AppContext} from "../api/context";
 
 
@@ -82,10 +82,11 @@ const ContentProductItem = ({product}) => {
     const [favoriteMeal, setFavoriteMeal] = useState(false);
 
     useEffect(() => {
-        if(favoritesMealsId.includes(product.idMeal)){
+        console.log("rerender");
+        if(favoritesMealsId.includes(product.idMeal) || localStorage.getItem(FAVORITES).split(",").includes(product.idMeal)){
             setFavoriteMeal(true);
         }
-    },[favoritesMealsId]);
+    },[favoritesMealsId, product]);
 
 
     const {image = product.strMealThumb,

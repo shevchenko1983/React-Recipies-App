@@ -30,16 +30,16 @@ export const parseSingleMealData = (singleMealData) => {
 
 
 export const onSendProductToFavorites = (product) => {
-    let id = product.idMeal;
+    //let id = product.idMeal;
     const productsIdsArr = [];
     //add to array productId
-    productsIdsArr.push(id);
+    productsIdsArr.push(product);
     //get all values from LocalStorage
-    if(getProductFromLocalStorage(FAVORITES) !== null){
-        productsIdsArr.push(...getProductFromLocalStorage(FAVORITES).split(","));
+    if(getProductFromLocalStorage(FAVORITES)){
+        productsIdsArr.push(...getProductFromLocalStorage(FAVORITES));
     }
     //Put new productId to these values, and push it back to LocalStorage
-    sendProductToLocalStorage(productsIdsArr.join(","));
+    sendProductToLocalStorage(JSON.stringify(productsIdsArr));
     //return array of Favorites Products Ids
     //console.log(productsIdsArr);
     return productsIdsArr;
@@ -49,8 +49,8 @@ const sendProductToLocalStorage = (productId) => {
     localStorage.setItem(FAVORITES, productId);
 }
 
-const getProductFromLocalStorage = (key) => {
-    return localStorage.getItem(key);
+export const getProductFromLocalStorage = (key) => {
+    return JSON.parse(localStorage.getItem(key));
 }
 
 

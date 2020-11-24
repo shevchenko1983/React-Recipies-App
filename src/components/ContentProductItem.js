@@ -4,7 +4,7 @@ import {AiOutlineHeart} from 'react-icons/ai';
 import {GiHeartWings} from 'react-icons/gi';
 import {NavLink} from "react-router-dom";
 import {FAVORITES, SINGLE_RECIPIE_PATH} from "../api/config";
-import {AppContext} from "../api/context";
+import {AppContext, getProductFromLocalStorage} from "../api/context";
 
 
 const ProductItem = styled('div')`  
@@ -82,9 +82,10 @@ const ContentProductItem = ({product}) => {
     const [favoriteMeal, setFavoriteMeal] = useState(false);
 
     useEffect(() => {
-        console.log("rerender");
-        if(favoritesMealsId.includes(product.idMeal) || localStorage.getItem(FAVORITES).split(",").includes(product.idMeal)){
+        if(favoritesMealsId.includes(product.idMeal) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === product.idMeal)){
             setFavoriteMeal(true);
+        }else{
+            setFavoriteMeal(false);
         }
     },[favoritesMealsId, product]);
 

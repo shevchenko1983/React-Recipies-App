@@ -45,8 +45,8 @@ export const onSendProductToFavorites = (product) => {
     return productsArr;
 };
 
-const sendProductToLocalStorage = (productId) => {
-    localStorage.setItem(FAVORITES, productId);
+const sendProductToLocalStorage = (product) => {
+    localStorage.setItem(FAVORITES, product);
 }
 
 export const getProductFromLocalStorage = (key) => {

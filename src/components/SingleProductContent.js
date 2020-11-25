@@ -2,9 +2,12 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useHistory} from "react-router";
 import {getMealById} from "../api/recipies-api";
 import styled from 'styled-components';
-import {AppContext} from "../api/context";
+import {AppContext, getProductFromLocalStorage} from "../api/context";
 import ContentText from "./ContentText";
 import {NavLink} from "react-router-dom";
+import {GiHeartWings} from "react-icons/gi";
+import {AiOutlineHeart} from "react-icons/ai";
+import {FAVORITES} from "../api/config";
 
 
 
@@ -26,6 +29,32 @@ const SingleProductWrapper = styled('div')`
             &:hover{
                 color: #cdc0ff;
             }
+        }
+        
+        & .product-item__image-panel{
+                position: absolute;
+                background-color: #f8e3f0e3;
+                left: 0;              
+                margin: auto;
+                bottom: 20px;
+                width: 100%;
+                max-width: 50%;
+                padding: 5px 0px;
+                text-align: right;
+                border-bottom-left-radius: 5px;
+                border-bottom-right-radius: 5px;            
+                 
+              & svg{              
+                padding-right: 15px;
+                color: #f17979;
+                cursor: pointer;
+                font-size: 18px;
+                    
+                &:hover{
+                  transform: scale(1.3);
+                  transition: all 0.5s ease-in-out;
+                }
+             }
         }   
     }
     & img{
@@ -51,6 +80,8 @@ const SingleProductWrapper = styled('div')`
 const SingleProductContent = () => {
     const [currMeal, setCurrMeal] = useState({});
     const [parsedData, setParsedData] = useState({});
+    const [favoritesMealsId, setFavoritesMealsId] = useState([]);
+    const [favoriteMeal, setFavoriteMeal] = useState(false);
     let mealId = useHistory().location.pathname.split("/")[2];
     let context = useContext(AppContext);
 
@@ -70,7 +101,15 @@ const SingleProductContent = () => {
         }
     },[Object.entries(currMeal).length]);
 
-    //console.log(currMeal, parsedData);
+    useEffect(() => {
+        if(favoritesMealsId.includes(mealId) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === mealId)){
+            setFavoriteMeal(true);
+        }else{
+            setFavoriteMeal(false);
+        }
+    },[favoritesMealsId, mealId]);
+
+    //console.log(currMeal, parsedData, favoriteMeal);
     return(
         <SingleProductWrapper>
             { Object.entries(parsedData).length > 0 &&
@@ -78,6 +117,14 @@ const SingleProductContent = () => {
                     <h2>{parsedData.mealTitle}</h2>
                     <div className="product_options">
                         <img src={parsedData.mealImage} alt=""/>
+                        <div className="product-item__image-panel">
+                            {favoriteMeal ?
+                                <GiHeartWings/>
+                                :
+                                <AiOutlineHeart
+                                    onClick={() => setFavoritesMealsId([...context.onSendProductToFavorites(...currMeal)])}/>
+                            }
+                        </div>
                         <NavLink className={"product_category"}
                                  onClick={() => context.getCategoryList(parsedData.categoryMeal)}
                                  to={{

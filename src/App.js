@@ -1,7 +1,13 @@
 import './App.css';
 import Header from "./components/Header";
 import TopProductItemsWrapper from "./components/top-components/TopProductItemsWrapper";
-import {AppContext, getFavoritesMealsId, onSendProductToFavorites, parseSingleMealData} from "./api/context";
+import {
+    AppContext,
+    getFavoritesMealsId,
+    getProductFromLocalStorage,
+    onSendProductToFavorites,
+    parseSingleMealData
+} from "./api/context";
 import React, {useEffect, useState} from "react";
 import ContentProductItemsWrapper from "./components/ContentProductItemsWrapper";
 import {
@@ -10,7 +16,7 @@ import {
     searchMealsByName
 } from "./api/recipies-api";
 import SingleProductContent from "./components/SingleProductContent";
-import {SINGLE_RECIPIE_PATH} from "./api/config";
+import {FAVORITES, SINGLE_RECIPIE_PATH} from "./api/config";
 import {Route, withRouter} from "react-router";
 
 
@@ -37,7 +43,6 @@ function App() {
         });
     };
 
-
    //get Category MealsList
   const getCategoryList = (categoryName) => {
       getCategoryMealsListByCategoryName(categoryName)
@@ -47,12 +52,18 @@ function App() {
       });
   };
 
-  //console.log(mealsListBySearch, mealsListByDefault);
+    //get Favorites Meals
+   const getFavoritesMealsList = () => {
+       setMealsListBySearch([...getProductFromLocalStorage(FAVORITES)]);
+       setShowCategoryProducts({category: "Favorites Meals", status: true});
+   }
+    //console.log(mealsListBySearch, mealsListByDefault);
 
   return (
     <div className="App">
         <AppContext.Provider
             value={{getMealsBySearch,
+                    getFavoritesMealsList,
                     setMealsListByDefault,
                     parseSingleMealData,
                     getCategoryList,

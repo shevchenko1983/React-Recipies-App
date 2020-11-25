@@ -1,7 +1,10 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import styled from 'styled-components';
 import SearchInput from "./SearchInput";
 import {RiUserStarFill} from 'react-icons/ri';
+import {AppContext, getFavoritesMealsList} from "../api/context";
+import {NavLink} from "react-router-dom";
+import App from "../App";
 
 const HeaderWrapper = styled('div')`
     padding: 10px 20px;
@@ -13,15 +16,23 @@ const HeaderWrapper = styled('div')`
         font-size: 25px;
         margin-left: 30px;
         cursor: pointer;
+        
+        &:hover{
+            color: #f69400;
+        }
     }
 `;
 
 const Header = () => {
-
+    const context = useContext(AppContext);
     return(
         <HeaderWrapper className={"header"}>
             <SearchInput/>
-            <RiUserStarFill className={"favorite-icon"}/>
+            <NavLink to={{pathname: "/"}}>
+               <RiUserStarFill className={"favorite-icon"}
+                                onClick={() => context.getFavoritesMealsList()}
+                />
+            </NavLink>
         </HeaderWrapper>
     );
 };

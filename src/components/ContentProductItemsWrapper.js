@@ -28,10 +28,10 @@ const ProductItemsWrapper = styled('div')`
 `;
 
 const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
-
     const mealsArr = [];
-    meals.forEach((item) => item.meals && mealsArr.push(...item.meals));
+    meals.forEach((item) => item.meals ? mealsArr.push(...item.meals) : mealsArr.push(item));
     let title =  showCategoryTitle ? categoryTitle + ":" : "Top Recipies: ";
+    //console.log(mealsArr, meals);
     return(
 
         <ProductItemsWrapper>

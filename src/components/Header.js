@@ -2,9 +2,9 @@ import React, {useContext} from 'react';
 import styled from 'styled-components';
 import SearchInput from "./SearchInput";
 import {RiUserStarFill} from 'react-icons/ri';
-import {AppContext, getFavoritesMealsList} from "../api/context";
+import {AppContext} from "../api/context";
 import {NavLink} from "react-router-dom";
-import App from "../App";
+
 
 const HeaderWrapper = styled('div')`
     padding: 10px 20px;

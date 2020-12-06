@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import styled from "styled-components";
 import {NavLink} from "react-router-dom";
 import {AppContext} from "../../api/context";
+import Tooltip from "rc-tooltip/lib/Tooltip";
 
 
 const Item = styled('div')`
@@ -34,12 +35,32 @@ const TopProductItem = ({product}) => {
 
     return(
         <NavLink to={{pathname: '/'}}>
-            <Item className={"top-product__item"}
-                  style={{backgroundImage: `url(${image})`}}
-                  onClick={() => context.getCategoryList(title)}
+            <Tooltip placement="bottom"
+                     trigger={['hover']}
+                     mouseEnterDelay={0.3}
+                     mouseLeaveDelay={0.2}
+                     destroyTooltipOnHide={true}
+                     overlay={<span>{description}</span>}
+                     overlayStyle={{
+                         backgroundColor: "#000",
+                         color: "#fff",
+                         maxWidth: "40%",
+                         margin: "auto",
+                         padding: "10px",
+                         borderRadius: "5px",
+                         maxHeight: "100px",
+                         overflow: "auto",
+
+                     }}
+                     overlayClassName={"custom-tooltip"}
             >
-                <p>{title}</p>
-            </Item>
+                <Item className={"top-product__item"}
+                      style={{backgroundImage: `url(${image})`}}
+                      onClick={() => context.getCategoryList(title)}
+                >
+                    <p>{title}</p>
+                </Item>
+            </Tooltip>
         </NavLink>
     );
 };

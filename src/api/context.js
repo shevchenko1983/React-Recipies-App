@@ -11,7 +11,7 @@ export const parseSingleMealData = (singleMealData) => {
         categoryMeal = meal.strCategory,
     } = meal;
 
-    //get ingredients List
+    //get ingredients List if they aren't empty
     const ingredients = [];
     for(let elem in meal){
         if(elem.includes("strIngredient") && meal[elem]){

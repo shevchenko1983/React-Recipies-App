@@ -20,7 +20,8 @@ const HeaderWrapper = styled('div')`
         &:hover{
             color: #f69400;
         }
-    }
+    }  
+  
 `;
 
 const Header = () => {

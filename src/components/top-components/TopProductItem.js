@@ -14,11 +14,14 @@ const Item = styled('div')`
     background-position: center;
     background-repeat: no-repeat;
     box-shadow: 0px 4px 3px #c571b76b;
-    margin: 0px 5px;
+    margin: 0px 12px;
     position: relative;
+    cursor: pointer;
+    display: inline-block;
+ 
     
     & p{
-        position: absolute;
+        position: relative;
         top: -42px;
         left: 0;
         right: 0;
@@ -33,6 +36,8 @@ const TopProductItem = ({product}) => {
          image = product.strCategoryThumb,
          description = product.strCategoryDescription} = product;
 
+
+
     return(
         <NavLink to={{pathname: '/'}}>
             <Tooltip placement="bottom"
@@ -41,16 +46,19 @@ const TopProductItem = ({product}) => {
                      mouseLeaveDelay={0.2}
                      destroyTooltipOnHide={true}
                      overlay={<span>{description}</span>}
+                     align={{
+                         offset: [0, 20],
+                     }}
                      overlayStyle={{
-                         backgroundColor: "#000",
-                         color: "#fff",
+                         backgroundColor: "#ffc0cbe0",
+                         color: "#000",
                          maxWidth: "40%",
                          margin: "auto",
                          padding: "10px",
                          borderRadius: "5px",
                          maxHeight: "100px",
                          overflow: "auto",
-
+                         boxShadow: "0px 4px 3px #c571b76b"
                      }}
                      overlayClassName={"custom-tooltip"}
             >

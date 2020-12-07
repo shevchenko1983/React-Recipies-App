@@ -3,7 +3,6 @@ import Header from "./components/Header";
 import TopProductItemsWrapper from "./components/top-components/TopProductItemsWrapper";
 import {
     AppContext,
-    getFavoritesMealsId,
     getProductFromLocalStorage,
     onSendProductToFavorites,
     parseSingleMealData

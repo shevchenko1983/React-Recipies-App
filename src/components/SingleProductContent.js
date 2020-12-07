@@ -75,6 +75,21 @@ const SingleProductWrapper = styled('div')`
         }
     }
    
+   @media (max-width: 767px){
+      .product_options{
+         flex-direction: column;
+         
+         & img{
+            max-width: 100%;
+         }
+         
+         & .product-item__image-panel{
+            position: relative;
+            max-width: 100%;
+            bottom: 50px;
+         }
+      }
+   }
 `;
 
 const SingleProductContent = () => {
@@ -101,6 +116,7 @@ const SingleProductContent = () => {
         }
     },[Object.entries(currMeal).length]);
 
+    //check if favorite Meal is unique
     useEffect(() => {
         if(favoritesMealsId.includes(mealId) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === mealId)){
             setFavoriteMeal(true);

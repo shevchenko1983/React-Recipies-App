@@ -5,7 +5,24 @@ import {BiSearchAlt2} from 'react-icons/bi';
 import {AppContext} from "../api/context";
 import {NavLink} from "react-router-dom";
 
-const SearchWrapper = styled('input')`
+
+const SearchWrapper = styled('div')`
+     display: inline-block;
+     width: 330px;
+     maxWidth: 50%;
+     position: relative;
+     text-align: left;
+     border-top-right-radius: 5px;
+     border-bottom-right-radius: 5px;
+     overflow: hidden;
+     
+     @media (max-width: 660px){
+        max-width: 80%;
+     }
+`;
+
+
+const SearchInputWrapper = styled('input')`
     padding: 5px 15px;
     color: #3f3f3f;
     background-color: #ffc0cb82;
@@ -72,17 +89,8 @@ const SearchInput = () => {
     //console.log(recipeName);
 
     return(
-        <div className={"search"} style={{
-            display: "inline-block",
-            width: "330px",
-            maxWidth: "50%",
-            position: "relative",
-            textAlign: "left",
-            borderTopRightRadius: "5px",
-            borderBottomRightRadius: "5px",
-            overflow: "hidden"
-        }}>
-            <SearchWrapper type={"text"}
+        <SearchWrapper className={"search"}>
+            <SearchInputWrapper type={"text"}
                            placeholder={"Search some recipie..."}
                            value={searchValue}
                            onChange={(e) => setSearchValue(e.target.value)}
@@ -93,7 +101,7 @@ const SearchInput = () => {
                 </NavLink>
             </SubmitInput>
 
-        </div>
+        </SearchWrapper>
     );
 };
 

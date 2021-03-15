@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {NavLink} from "react-router-dom";
 import {AppContext} from "../../api/context";
 import Tooltip from "rc-tooltip/lib/Tooltip";
+import {BASE_URL, RECIPIE_CATEGORY_PATH} from "../../api/config";
 
 
 const Item = styled('div')`
@@ -27,6 +28,10 @@ const Item = styled('div')`
         right: 0;
         text-decoration: none;
     }
+    & a{
+        color: #000;
+        text-decoration: none;
+    }
 `;
 
 const TopProductItem = ({product}) => {
@@ -39,7 +44,7 @@ const TopProductItem = ({product}) => {
 
 
     return(
-        <>
+        <NavLink to={{pathname: RECIPIE_CATEGORY_PATH + title}} onClick={() => context.getCategoryList(title)}>
             <Tooltip placement="bottom"
                      trigger={['hover']}
                      mouseEnterDelay={0.3}
@@ -64,12 +69,11 @@ const TopProductItem = ({product}) => {
             >
                 <Item className={"top-product__item"}
                       style={{backgroundImage: `url(${image})`}}
-                      onClick={() => context.getCategoryList(title)}
                 >
                     <p>{title}</p>
                 </Item>
             </Tooltip>
-        </>
+        </NavLink>
     );
 };
 

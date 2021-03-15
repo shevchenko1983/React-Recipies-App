@@ -15,8 +15,8 @@ import {
     searchMealsByName
 } from "./api/recipies-api";
 import SingleProductContent from "./components/SingleProductContent";
-import {FAVORITES, SINGLE_RECIPIE_PATH} from "./api/config";
-import {Route, withRouter} from "react-router";
+import {FAVORITES, RECIPIE_CATEGORY_PATH, SINGLE_RECIPIE_PATH} from "./api/config";
+import {Route, useHistory, withRouter} from "react-router-dom";
 
 
 
@@ -31,7 +31,7 @@ function App() {
           getMealByRandom().then((meal) => setMealsListByDefault([...mealsListByDefault, meal])) ;
       }
   },[mealsListByDefault, mealsListBySearch]);
-
+    //console.log(useHistory())
 
     //get MealsList By Search
     const getMealsBySearch = (recipeName) => {
@@ -56,7 +56,7 @@ function App() {
        setMealsListBySearch([...getProductFromLocalStorage(FAVORITES)]);
        setShowCategoryProducts({category: "Favorites Meals", status: true});
    }
-    //console.log(mealsListBySearch, mealsListByDefault);
+    //console.log(mealsListBySearch);
 
   return (
     <div className="App">
@@ -78,7 +78,12 @@ function App() {
                                                 showCategoryTitle={showCategoryProducts.status}
                                                 categoryTitle={showCategoryProducts.category}
             />}/>
-            <Route path={SINGLE_RECIPIE_PATH} component={SingleProductContent}/>
+            <Route exact path={`${RECIPIE_CATEGORY_PATH}:name`} render={() => <ContentProductItemsWrapper
+                                                                meals={mealsListBySearch}
+                                                                showCategoryTitle={showCategoryProducts.status}
+                                                                categoryTitle={showCategoryProducts.category}
+            />}/>
+            <Route exact path={`${SINGLE_RECIPIE_PATH}:id`} component={SingleProductContent}/>
         </AppContext.Provider>
     </div>
   );

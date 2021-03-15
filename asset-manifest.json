@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/React-Recipies-App/static/css/main.df4d457b.chunk.css",
-    "main.js": "/React-Recipies-App/static/js/main.9986ecdd.chunk.js",
-    "main.js.map": "/React-Recipies-App/static/js/main.9986ecdd.chunk.js.map",
+    "main.js": "/React-Recipies-App/static/js/main.43cd25d6.chunk.js",
+    "main.js.map": "/React-Recipies-App/static/js/main.43cd25d6.chunk.js.map",
     "runtime-main.js": "/React-Recipies-App/static/js/runtime-main.4ab51fc7.js",
     "runtime-main.js.map": "/React-Recipies-App/static/js/runtime-main.4ab51fc7.js.map",
-    "static/js/2.5fb45463.chunk.js": "/React-Recipies-App/static/js/2.5fb45463.chunk.js",
-    "static/js/2.5fb45463.chunk.js.map": "/React-Recipies-App/static/js/2.5fb45463.chunk.js.map",
+    "static/js/2.f413635d.chunk.js": "/React-Recipies-App/static/js/2.f413635d.chunk.js",
+    "static/js/2.f413635d.chunk.js.map": "/React-Recipies-App/static/js/2.f413635d.chunk.js.map",
     "static/js/3.8cc4342b.chunk.js": "/React-Recipies-App/static/js/3.8cc4342b.chunk.js",
     "static/js/3.8cc4342b.chunk.js.map": "/React-Recipies-App/static/js/3.8cc4342b.chunk.js.map",
     "index.html": "/React-Recipies-App/index.html",
     "static/css/main.df4d457b.chunk.css.map": "/React-Recipies-App/static/css/main.df4d457b.chunk.css.map",
-    "static/js/2.5fb45463.chunk.js.LICENSE.txt": "/React-Recipies-App/static/js/2.5fb45463.chunk.js.LICENSE.txt"
+    "static/js/2.f413635d.chunk.js.LICENSE.txt": "/React-Recipies-App/static/js/2.f413635d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.4ab51fc7.js",
-    "static/js/2.5fb45463.chunk.js",
+    "static/js/2.f413635d.chunk.js",
     "static/css/main.df4d457b.chunk.css",
-    "static/js/main.9986ecdd.chunk.js"
+    "static/js/main.43cd25d6.chunk.js"
   ]
 }

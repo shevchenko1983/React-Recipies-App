@@ -39,7 +39,7 @@ const TopProductItem = ({product}) => {
 
 
     return(
-        <NavLink to={{pathname: '/'}}>
+        <>
             <Tooltip placement="bottom"
                      trigger={['hover']}
                      mouseEnterDelay={0.3}
@@ -69,7 +69,7 @@ const TopProductItem = ({product}) => {
                     <p>{title}</p>
                 </Item>
             </Tooltip>
-        </NavLink>
+        </>
     );
 };
 

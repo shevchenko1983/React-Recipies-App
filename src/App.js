@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
       //Fill list of Default meal if mealsListBySearch is empty
-      if(mealsListByDefault.length < 5 && mealsListBySearch.length === 0){
+      if(mealsListByDefault.length < 5 && !mealsListBySearch.length){
           getMealByRandom().then((meal) => setMealsListByDefault([...mealsListByDefault, meal])) ;
       }
   },[mealsListByDefault, mealsListBySearch]);

@@ -30,10 +30,7 @@ export const parseSingleMealData = (singleMealData) => {
 
 
 export const onSendProductToFavorites = (product) => {
-    //let id = product.idMeal;
-    const productsArr = [];
-    //add to array productId
-    productsArr.push(product);
+    const productsArr = [product];
     //get all values from LocalStorage
     if(getProductFromLocalStorage(FAVORITES)){
         productsArr.push(...getProductFromLocalStorage(FAVORITES));
@@ -41,7 +38,6 @@ export const onSendProductToFavorites = (product) => {
     //Put new product to these values, and push it back to LocalStorage
     sendProductToLocalStorage(JSON.stringify(productsArr));
     //return array of Favorites Products
-    //console.log(productsIdsArr);
     return productsArr;
 };
 

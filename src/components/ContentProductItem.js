@@ -6,7 +6,6 @@ import {NavLink} from "react-router-dom";
 import {FAVORITES, SINGLE_RECIPIE_PATH} from "../api/config";
 import {AppContext, getProductFromLocalStorage} from "../api/context";
 
-
 const ProductItem = styled('div')`  
     max-width: 45%;
     flex-basis: 50%;
@@ -41,6 +40,7 @@ const ProductItem = styled('div')`
             transition: all 0.5s ease-in-out;
         }      
     }
+    
     & .product-item__image-panel{
         position: absolute;
         background-color: #f8e3f0e3;
@@ -78,40 +78,41 @@ const ProductItem = styled('div')`
 
 const ContentProductItem = ({product}) => {
     const context = useContext(AppContext);
-    const [favoritesMealsId, setFavoritesMealsId] = useState([]);
-    const [favoriteMeal, setFavoriteMeal] = useState(false);
+    const [favoritesMeals, setFavoritesMeals] = useState([]);
+    const [isFavoriteMeal, setIsFavoriteMeal] = useState(false);
 
     useEffect(() => {
-        if(favoritesMealsId.includes(product.idMeal) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === product.idMeal)){
-            setFavoriteMeal(true);
-        }else{
-            setFavoriteMeal(false);
+
+        if(favoritesMeals.includes(product.idMeal) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === product.idMeal)){
+            return setIsFavoriteMeal(true);
         }
-    },[favoritesMealsId, product]);
 
+        return setIsFavoriteMeal(false);
 
-    const {image = product.strMealThumb,
-           title = product.strMeal,
-           id = product.idMeal,
+    },[favoritesMeals, product]);
+
+    const {
+        image = product.strMealThumb,
+        title = product.strMeal,
+        id = product.idMeal,
     } = product;
-    //console.log(product);
 
     return(
-          <ProductItem className={"content-product__item"}>
+          <ProductItem className="content-product__item">
               <NavLink to={{
                   pathname: SINGLE_RECIPIE_PATH + id
               }}>
                   <h3>{title}</h3>
                   <div className="image-holder">
-                      <div className="content-product__item-image" style={{backgroundImage: `url(${image})`}}></div>
+                      <div className="content-product__item-image" style={{backgroundImage: `url(${image})`}}/>
                   </div>
               </NavLink>
               <div className="product-item__image-panel">
-                  {favoriteMeal ?
+                  {isFavoriteMeal ?
                       <GiHeartWings/>
                       :
                       <AiOutlineHeart
-                          onClick={() => setFavoritesMealsId([...context.onSendProductToFavorites(product)])}/>
+                          onClick={() => setFavoritesMeals([...context.onSendProductToFavorites(product)])}/>
                   }
               </div>
           </ProductItem>

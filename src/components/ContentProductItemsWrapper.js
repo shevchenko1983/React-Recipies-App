@@ -2,8 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import ContentProductItem from "./ContentProductItem";
 
-
-
 const ProductItemsWrapper = styled('div')`
     padding: 20px;
     
@@ -14,7 +12,6 @@ const ProductItemsWrapper = styled('div')`
     & .content-products__item{
         display: flex;
         flex-flow: row wrap;
-        // overflow: hidden;
     }   
     
     & a{       
@@ -28,10 +25,11 @@ const ProductItemsWrapper = styled('div')`
 `;
 
 const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
+    console.log('meals', meals)
     const mealsArr = [];
     meals.forEach((item) => item.meals ? mealsArr.push(...item.meals) : mealsArr.push(item));
-    let title =  showCategoryTitle ? categoryTitle + ":" : "Top Recipies: ";
-    //console.log(mealsArr, meals);
+    const title =  showCategoryTitle ? `${categoryTitle}: ` : "Top Recipies: ";
+
     return(
 
         <ProductItemsWrapper>

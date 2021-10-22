@@ -4,7 +4,6 @@ import {NavLink} from "react-router-dom";
 import {AppContext} from "../../api/context";
 import Tooltip from "rc-tooltip/lib/Tooltip";
 
-
 const Item = styled('div')`
     width: 75px;
     height: 75px;
@@ -19,7 +18,6 @@ const Item = styled('div')`
     cursor: pointer;
     display: inline-block;
  
-    
     & p{
         position: relative;
         top: -42px;
@@ -31,12 +29,11 @@ const Item = styled('div')`
 
 const TopProductItem = ({product}) => {
     const context = useContext(AppContext);
-    let {id = product.idCategory,
+    const {
          title = product.strCategory,
          image = product.strCategoryThumb,
-         description = product.strCategoryDescription} = product;
-
-
+         description = product.strCategoryDescription
+    } = product;
 
     return(
         <NavLink to={{pathname: '/'}}>
@@ -60,9 +57,9 @@ const TopProductItem = ({product}) => {
                          overflow: "auto",
                          boxShadow: "0px 4px 3px #c571b76b"
                      }}
-                     overlayClassName={"custom-tooltip"}
+                     overlayClassName="custom-tooltip"
             >
-                <Item className={"top-product__item"}
+                <Item className="top-product__item"
                       style={{backgroundImage: `url(${image})`}}
                       onClick={() => context.getCategoryList(title)}
                 >

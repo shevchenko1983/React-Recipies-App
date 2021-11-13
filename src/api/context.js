@@ -4,18 +4,17 @@ import {FAVORITES} from "./config";
 
 //Parse data  SingleMeal
 export const parseSingleMealData = (singleMealData) => {
-    let meal = Object.values(singleMealData)[0];
-    let {mealTitle = meal.strMeal,
-        mealImage = meal.strMealThumb,
-        instructions = meal.strInstructions,
-        categoryMeal = meal.strCategory,
-    } = meal;
+    let {mealTitle = singleMealData.strMeal,
+        mealImage = singleMealData.strMealThumb,
+        instructions = singleMealData.strInstructions,
+        categoryMeal = singleMealData.strCategory,
+    } = singleMealData;
 
     //get ingredients List if they aren't empty
     const ingredients = [];
-    for(let elem in meal){
-        if(elem.includes("strIngredient") && meal[elem]){
-            ingredients.push(meal[elem]);
+    for(let elem in singleMealData){
+        if(elem.includes("strIngredient") && singleMealData[elem]){
+            ingredients.push(singleMealData[elem]);
         }
     };
 

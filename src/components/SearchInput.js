@@ -5,7 +5,6 @@ import {BiSearchAlt2} from 'react-icons/bi';
 import {AppContext} from "../api/context";
 import {NavLink} from "react-router-dom";
 
-
 const SearchWrapper = styled('div')`
      display: inline-block;
      width: 330px;
@@ -21,7 +20,6 @@ const SearchWrapper = styled('div')`
      }
 `;
 
-
 const SearchInputWrapper = styled('input')`
     padding: 5px 15px;
     color: #3f3f3f;
@@ -33,10 +31,9 @@ const SearchInputWrapper = styled('input')`
     border-radius: 5px;    
     overflow: hidden;
     
-    
     &:focus{
-        outline:none;
-        box-shadow: 0 5px 6px #c571b76b;
+       outline:none;
+       box-shadow: 0 5px 6px #c571b76b;
     }
 `;
 
@@ -90,17 +87,17 @@ const SearchInput = () => {
 
     return(
         <SearchWrapper className={"search"}>
-            <SearchInputWrapper type={"text"}
-                           placeholder={"Search some recipie..."}
-                           value={searchValue}
-                           onChange={(e) => setSearchValue(e.target.value)}
+            <SearchInputWrapper
+                type={"text"}
+                placeholder={"Search some recipie..."}
+                value={searchValue}
+                onChange={(e) => setSearchValue(e.target.value)}
             />
             <SubmitInput>
                 <NavLink to={{pathname: "/"}}>
                     <BiSearchAlt2 onClick={() => setRecipeName(searchValue)}/>
                 </NavLink>
             </SubmitInput>
-
         </SearchWrapper>
     );
 };

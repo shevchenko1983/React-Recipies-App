@@ -10,17 +10,17 @@ const ProductItemsWrapper = styled('div')`
     }  
     
     & .content-products__item{
-        display: flex;
-        flex-flow: row wrap;
+       display: flex;
+       flex-flow: row wrap;
     }   
     
     & a{       
-        color:#000;
-        text-decoration: none;        
+       color:#000;
+       text-decoration: none;        
     }  
     
     @media (max-width: 767px){
-        flex-flow: column nowrap;       
+       flex-flow: column nowrap;       
     }
 `;
 
@@ -33,7 +33,7 @@ const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) =
     return(
 
         <ProductItemsWrapper>
-            <h3>{mealsArr.length > 0 ? title : "No Results..."}</h3>
+            <h3>{mealsArr.length ? title : "No Results..."}</h3>
             <div className="content-products__item">
                 {mealsArr.map((item, index) => {
                     return <ContentProductItem product={item} key={index}/>

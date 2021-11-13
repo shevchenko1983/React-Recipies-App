@@ -5,7 +5,6 @@ import {RiUserStarFill} from 'react-icons/ri';
 import {AppContext} from "../api/context";
 import {NavLink} from "react-router-dom";
 
-
 const HeaderWrapper = styled('div')`
     padding: 10px 20px;
     border-bottom: 2px solid #cfa4bf;

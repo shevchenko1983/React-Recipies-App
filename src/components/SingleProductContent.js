@@ -9,8 +9,6 @@ import {GiHeartWings} from "react-icons/gi";
 import {AiOutlineHeart} from "react-icons/ai";
 import {FAVORITES} from "../api/config";
 
-
-
 const SingleProductWrapper = styled('div')`
     & .product_options{
         padding: 0px 15px;
@@ -57,12 +55,14 @@ const SingleProductWrapper = styled('div')`
              }
         }   
     }
+    
     & img{
         width: 100%;
         max-width: 50%;
         margin-bottom: 20px;
         border-radius: 5px;
     }
+    
     & ol{
         margin: 0;
         & p{
@@ -93,11 +93,12 @@ const SingleProductWrapper = styled('div')`
 `;
 
 const SingleProductContent = () => {
-    const [currMeal, setCurrMeal] = useState({});
+    const [currMeal, setCurrMeal] = useState([]);
     const [parsedData, setParsedData] = useState({});
     const [favoritesMealsId, setFavoritesMealsId] = useState([]);
-    const [favoriteMeal, setFavoriteMeal] = useState(false);
-    let mealId = useHistory().location.pathname.split("/")[2];
+    const [isFavoriteMeal, setIsFavoriteMeal] = useState(false);
+    const { location } = useHistory();
+    let mealId = location.pathname.split("/")[2];
     let context = useContext(AppContext);
 
     //Check if has mealId
@@ -106,35 +107,41 @@ const SingleProductContent = () => {
             getMealById(mealId)
             .then((response) => setCurrMeal(response.meals));
         }
-
     }, [mealId]);
 
     //check if currMeal is not empty
     useEffect(() => {
-        if(Object.entries(currMeal).length > 0){
-            setParsedData(context.parseSingleMealData(currMeal));
+        if(currMeal.length){
+            setParsedData(context.parseSingleMealData(currMeal[0]));
         }
-    },[Object.entries(currMeal).length]);
+    },[currMeal.length]);
 
     //check if favorite Meal is unique
     useEffect(() => {
         if(favoritesMealsId.includes(mealId) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === mealId)){
-            setFavoriteMeal(true);
-        }else{
-            setFavoriteMeal(false);
+            setIsFavoriteMeal(true);
+            return;
         }
+        setIsFavoriteMeal(false);
     },[favoritesMealsId, mealId]);
 
-    //console.log(currMeal, parsedData, favoriteMeal);
+    const {
+        mealTitle,
+        mealImage,
+        instructions,
+        ingredients,
+        categoryMeal
+    } = parsedData;
+
     return(
         <SingleProductWrapper>
-            { Object.entries(parsedData).length > 0 &&
+            { Object.entries(parsedData).length &&
                 <>
-                    <h2>{parsedData.mealTitle}</h2>
+                    <h2>{mealTitle}</h2>
                     <div className="product_options">
-                        <img src={parsedData.mealImage} alt=""/>
+                        <img src={mealImage} alt=""/>
                         <div className="product-item__image-panel">
-                            {favoriteMeal ?
+                            {isFavoriteMeal ?
                                 <GiHeartWings/>
                                 :
                                 <AiOutlineHeart
@@ -142,22 +149,22 @@ const SingleProductContent = () => {
                             }
                         </div>
                         <NavLink className={"product_category"}
-                                 onClick={() => context.getCategoryList(parsedData.categoryMeal)}
+                                 onClick={() => context.getCategoryList(categoryMeal)}
                                  to={{
                                      pathname: "/"
                                  }}
                         >
-                            {parsedData.categoryMeal}
+                            {categoryMeal}
                         </NavLink>
                         <ol className="engridients">
-                            <p>Engridients: </p>
-                            {parsedData.ingredients.map((item, index) => {
+                            <p>Ingridients: </p>
+                            {ingredients?.map((item, index) => {
                                 return <li key={index}>{item}</li>
-                            })}
+                            }) ?? null}
                         </ol>
                     </div>
                     <h3>How to do it?!...</h3>
-                    <ContentText text={parsedData.instructions}/>
+                    <ContentText text={instructions}/>
                 </>}
         </SingleProductWrapper>
     );

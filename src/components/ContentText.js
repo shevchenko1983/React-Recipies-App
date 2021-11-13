@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const ContentWrapper = styled('div')`
-    padding: 0px 15px;
-    margin-bottom: 20px;
-    & p{
+   padding: 0px 15px;
+   margin-bottom: 20px;
+   & p{
         text-align: justify;
-    }
+   }
 `;
 
 const ContentText = ({text}) => {

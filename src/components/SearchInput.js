@@ -78,12 +78,11 @@ const SearchInput = () => {
     const context = useContext(AppContext);
 
     useEffect(() => {
-        if(recipeName){
-            context.getMealsBySearch(recipeName);
+        if(!recipeName){
+            return;
         }
+        context.getMealsBySearch(recipeName);
     },[recipeName]);
-
-    //console.log(recipeName);
 
     return(
         <SearchWrapper className={"search"}>

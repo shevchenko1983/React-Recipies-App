@@ -25,19 +25,17 @@ const ProductItemsWrapper = styled('div')`
 `;
 
 const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
-    console.log('meals', meals)
-    const mealsArr = [];
-    meals.forEach((item) => item.meals ? mealsArr.push(...item.meals) : mealsArr.push(item));
+
+    const mealsArr = Object.values(meals?.[0] ?? meals).flat();
     const title =  showCategoryTitle ? `${categoryTitle}: ` : "Top Recipies: ";
 
     return(
-
         <ProductItemsWrapper>
-            <h3>{mealsArr.length ? title : "No Results..."}</h3>
+            <h3>{mealsArr ? title : "No Results..."}</h3>
             <div className="content-products__item">
-                {mealsArr.map((item, index) => {
+                {mealsArr?.map((item, index) => {
                     return <ContentProductItem product={item} key={index}/>
-                })}
+                }) ?? null}
             </div>
         </ProductItemsWrapper>
     );

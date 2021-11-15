@@ -103,17 +103,18 @@ const SingleProductContent = () => {
 
     //Check if has mealId
     useEffect(() => {
-        if(mealId){
-            getMealById(mealId)
-            .then((response) => setCurrMeal(response.meals));
+        if(!mealId){
+            return;
         }
+        getMealById(mealId).then((response) => setCurrMeal(response.meals));
     }, [mealId]);
 
     //check if currMeal is not empty
     useEffect(() => {
-        if(currMeal.length){
-            setParsedData(context.parseSingleMealData(currMeal[0]));
+        if(!currMeal.length){
+            return;
         }
+        setParsedData(context.parseSingleMealData(currMeal[0]));
     },[currMeal.length]);
 
     //check if favorite Meal is unique
@@ -135,7 +136,7 @@ const SingleProductContent = () => {
 
     return(
         <SingleProductWrapper>
-            { Object.entries(parsedData).length &&
+            { Object.keys(parsedData).length &&
                 <>
                     <h2>{mealTitle}</h2>
                     <div className="product_options">

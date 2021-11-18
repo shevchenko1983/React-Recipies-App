@@ -67,6 +67,7 @@ const SingleProductWrapper = styled('div')`
         margin: 0;
         & p{
             margin: 0;
+            text-align: initial;
             font-weight: 600;
         }
         & li{       
@@ -126,6 +127,10 @@ const SingleProductContent = () => {
         setIsFavoriteMeal(false);
     },[favoritesMealsId, mealId]);
 
+    if(!parsedData) {
+        return <div/>
+    }
+
     const {
         mealTitle,
         mealImage,
@@ -136,7 +141,6 @@ const SingleProductContent = () => {
 
     return(
         <SingleProductWrapper>
-            { Object.keys(parsedData).length &&
                 <>
                     <h2>{mealTitle}</h2>
                     <div className="product_options">
@@ -166,7 +170,7 @@ const SingleProductContent = () => {
                     </div>
                     <h3>How to do it?!...</h3>
                     <ContentText text={instructions}/>
-                </>}
+                </>
         </SingleProductWrapper>
     );
 }

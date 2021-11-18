@@ -3,7 +3,7 @@ import styled from "styled-components";
 import {NavLink} from "react-router-dom";
 import {AppContext} from "../../api/context";
 import Tooltip from "rc-tooltip/lib/Tooltip";
-import {BASE_URL, RECIPIE_CATEGORY_PATH} from "../../api/config";
+import {RECIPIE_CATEGORY_PATH} from "../../api/config";
 
 const Item = styled('div')`
     width: 75px;
@@ -34,6 +34,11 @@ const Item = styled('div')`
 
 const TopProductItem = ({product}) => {
     const context = useContext(AppContext);
+
+    if(!product){
+        return <div/>
+    }
+
     const {
          title = product.strCategory,
          image = product.strCategoryThumb,

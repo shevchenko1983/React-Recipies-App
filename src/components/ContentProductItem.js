@@ -83,13 +83,17 @@ const ContentProductItem = ({product}) => {
 
     useEffect(() => {
 
-        if(favoritesMeals.includes(product.idMeal) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === product.idMeal)){
+        if(favoritesMeals.includes(product?.idMeal) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === product?.idMeal)){
             return setIsFavoriteMeal(true);
         }
 
         return setIsFavoriteMeal(false);
 
     },[favoritesMeals, product]);
+
+    if(!product) {
+        return <div/>
+    }
 
     const {
         image = product.strMealThumb,

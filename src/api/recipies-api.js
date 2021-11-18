@@ -9,7 +9,7 @@ import {
 //get Meal be searching
 export const searchMealsByName = async (searchValue) => {
     try{
-        let response = await fetch(SEARCH_MEALS_BY_NAME + searchValue);
+        const response = await fetch(SEARCH_MEALS_BY_NAME + searchValue);
         return await response.json();
     }catch (e) {
         console.error(e.message);
@@ -19,7 +19,7 @@ export const searchMealsByName = async (searchValue) => {
 //get Meal By Random
 export const getMealByRandom = async () => {
     try{
-        let response = await fetch(GET_MEAL_BY_RANDOM);
+        const response = await fetch(GET_MEAL_BY_RANDOM);
         return await response.json();
     }catch (e) {
         console.error(e.message);
@@ -29,7 +29,7 @@ export const getMealByRandom = async () => {
 //get Meal By Id
 export const getMealById = async (mealId) => {
     try{
-        let response = await fetch(GET_MEAL_BY_ID + mealId);
+        const response = await fetch(GET_MEAL_BY_ID + mealId);
         return await response.json();
     }catch (e) {
         console.error(e.message);
@@ -39,7 +39,7 @@ export const getMealById = async (mealId) => {
 //get Category Meals List By Category Name
 export const getCategoryMealsListByCategoryName = async (categoryName) => {
     try{
-        let response = await fetch(GET_CATEGORY_MEALS_LIST_BY_CATEGORY_NAME + categoryName);
+        const response = await fetch(GET_CATEGORY_MEALS_LIST_BY_CATEGORY_NAME + categoryName);
         return await response.json();
     }catch (e) {
         console.error(e.message);
@@ -49,7 +49,7 @@ export const getCategoryMealsListByCategoryName = async (categoryName) => {
 //get ALL Categories Meals List
 export const getAllCategoriesMeals = async () => {
     try{
-        let response = await fetch(GET_ALL_CATEGORIES_MEALS_LIST);
+        const response = await fetch(GET_ALL_CATEGORIES_MEALS_LIST);
         return await response.json();
     }catch (e) {
         console.error(e.message);

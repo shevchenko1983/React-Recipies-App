@@ -1,9 +1,12 @@
 import React from 'react';
 import {FAVORITES} from "./config";
 
-
 //Parse data  SingleMeal
 export const parseSingleMealData = (singleMealData) => {
+    if(!singleMealData) {
+        return null;
+    }
+
     let {mealTitle = singleMealData.strMeal,
         mealImage = singleMealData.strMealThumb,
         instructions = singleMealData.strInstructions,
@@ -27,8 +30,10 @@ export const parseSingleMealData = (singleMealData) => {
     }
 };
 
-
 export const onSendProductToFavorites = (product) => {
+    if(!product) {
+        return null;
+    }
     const productsArr = [product];
     //get all values from LocalStorage
     if(getProductFromLocalStorage(FAVORITES)){
@@ -41,13 +46,19 @@ export const onSendProductToFavorites = (product) => {
 };
 
 const sendProductToLocalStorage = (product) => {
+    if(!product) {
+        return;
+    }
     localStorage.setItem(FAVORITES, product);
 }
 
 export const getProductFromLocalStorage = (key) => {
+    if(!key) {
+        return null;
+    }
+
     return JSON.parse(localStorage.getItem(key));
 }
-
 
 //Create AppContext for using via UseContext Hooks inside application
 export const AppContext = React.createContext({});

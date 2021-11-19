@@ -19,7 +19,7 @@ export const parseSingleMealData = (singleMealData) => {
         if(elem.includes("strIngredient") && singleMealData[elem]){
             ingredients.push(singleMealData[elem]);
         }
-    };
+    }
 
     return {
         mealTitle,
@@ -32,20 +32,24 @@ export const parseSingleMealData = (singleMealData) => {
 
 export const onSendProductToFavorites = (product) => {
     if(!product) {
-        return null;
+        return false;
     }
-    const productsArr = [product];
-    //get all values from LocalStorage
-    if(getProductFromLocalStorage(FAVORITES)){
-        productsArr.push(...getProductFromLocalStorage(FAVORITES));
-    }
-    //Put new product to these values, and push it back to LocalStorage
-    sendProductToLocalStorage(JSON.stringify(productsArr));
-    //return array of Favorites Products
-    return productsArr;
+    //get all values from LocalStorage and put new product to these values, and push it back to LocalStorage
+    setProductToLocalStorage(JSON.stringify([...getProductFromLocalStorage(FAVORITES), product]));
+    return true;
 };
 
-const sendProductToLocalStorage = (product) => {
+export const onRemoveProductFromFavorites = (product) => {
+    if(!product) {
+        return null;
+    }
+    //get all values from LocalStorage and remove current product from values, and push it back to LocalStorage
+    const updatedArray = getProductFromLocalStorage(FAVORITES).filter((item) => item.idMeal !== product.idMeal);
+    setProductToLocalStorage(JSON.stringify([...updatedArray]));
+    return true;
+};
+
+const setProductToLocalStorage = (product) => {
     if(!product) {
         return;
     }
@@ -56,8 +60,7 @@ export const getProductFromLocalStorage = (key) => {
     if(!key) {
         return null;
     }
-
-    return JSON.parse(localStorage.getItem(key));
+    return JSON.parse(localStorage.getItem(key)) ?? [];
 }
 
 //Create AppContext for using via UseContext Hooks inside application

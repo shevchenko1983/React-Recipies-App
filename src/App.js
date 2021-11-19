@@ -5,6 +5,7 @@ import {
     AppContext,
     getProductFromLocalStorage,
     onSendProductToFavorites,
+    onRemoveProductFromFavorites,
     parseSingleMealData
 } from "./api/context";
 import React, {useEffect, useState} from "react";
@@ -61,12 +62,14 @@ function App() {
   return (
     <div className="App">
         <AppContext.Provider
-            value={{getMealsBySearch,
-                    getFavoritesMealsList,
-                    setMealsListByDefault,
-                    parseSingleMealData,
-                    getCategoryList,
-                    onSendProductToFavorites,
+            value={{
+                getMealsBySearch,
+                getFavoritesMealsList,
+                setMealsListByDefault,
+                parseSingleMealData,
+                getCategoryList,
+                onSendProductToFavorites,
+                onRemoveProductFromFavorites,
             }}
         >
             <Header/>

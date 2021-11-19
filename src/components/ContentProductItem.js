@@ -78,18 +78,14 @@ const ProductItem = styled('div')`
 
 const ContentProductItem = ({product}) => {
     const context = useContext(AppContext);
-    const [favoritesMeals, setFavoritesMeals] = useState([]);
     const [isFavoriteMeal, setIsFavoriteMeal] = useState(false);
 
     useEffect(() => {
-
-        if(favoritesMeals.includes(product?.idMeal) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === product?.idMeal)){
+        if(getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === product?.idMeal)){
             return setIsFavoriteMeal(true);
         }
-
         return setIsFavoriteMeal(false);
-
-    },[favoritesMeals, product]);
+    }, [product]);
 
     if(!product) {
         return <div/>
@@ -113,10 +109,13 @@ const ContentProductItem = ({product}) => {
               </NavLink>
               <div className="product-item__image-panel">
                   {isFavoriteMeal ?
-                      <GiHeartWings/>
+                      <GiHeartWings
+                          onClick={() => setIsFavoriteMeal(!context.onRemoveProductFromFavorites(product))}
+                      />
                       :
                       <AiOutlineHeart
-                          onClick={() => setFavoritesMeals([...context.onSendProductToFavorites(product)])}/>
+                          onClick={() => setIsFavoriteMeal(context.onSendProductToFavorites(product))}
+                      />
                   }
               </div>
           </ProductItem>

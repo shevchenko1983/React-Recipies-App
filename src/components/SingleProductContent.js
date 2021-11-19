@@ -96,7 +96,6 @@ const SingleProductWrapper = styled('div')`
 const SingleProductContent = () => {
     const [currMeal, setCurrMeal] = useState([]);
     const [parsedData, setParsedData] = useState({});
-    const [favoritesMealsId, setFavoritesMealsId] = useState([]);
     const [isFavoriteMeal, setIsFavoriteMeal] = useState(false);
     const { location } = useHistory();
     let mealId = location.pathname.split("/")[2];
@@ -120,12 +119,11 @@ const SingleProductContent = () => {
 
     //check if favorite Meal is unique
     useEffect(() => {
-        if(favoritesMealsId.includes(mealId) || getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === mealId)){
-            setIsFavoriteMeal(true);
-            return;
+        if(getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === mealId)){
+            return setIsFavoriteMeal(true);
         }
-        setIsFavoriteMeal(false);
-    },[favoritesMealsId, mealId]);
+        return setIsFavoriteMeal(false);
+    },[mealId]);
 
     if(!parsedData) {
         return <div/>
@@ -147,10 +145,13 @@ const SingleProductContent = () => {
                         <img src={mealImage} alt=""/>
                         <div className="product-item__image-panel">
                             {isFavoriteMeal ?
-                                <GiHeartWings/>
+                                <GiHeartWings
+                                    onClick={() => setIsFavoriteMeal(!context.onRemoveProductFromFavorites(...currMeal))}
+                                />
                                 :
                                 <AiOutlineHeart
-                                    onClick={() => setFavoritesMealsId([...context.onSendProductToFavorites(...currMeal)])}/>
+                                    onClick={() => setIsFavoriteMeal(context.onSendProductToFavorites(...currMeal))}
+                                />
                             }
                         </div>
                         <NavLink className={"product_category"}
@@ -162,7 +163,7 @@ const SingleProductContent = () => {
                             {categoryMeal}
                         </NavLink>
                         <ol className="engridients">
-                            <p>Ingridients: </p>
+                            <p>Ingredients: </p>
                             {ingredients?.map((item, index) => {
                                 return <li key={index}>{item}</li>
                             }) ?? null}

@@ -98,8 +98,8 @@ const SingleProductContent = () => {
     const [parsedData, setParsedData] = useState({});
     const [isFavoriteMeal, setIsFavoriteMeal] = useState(false);
     const { location } = useHistory();
-    let mealId = location.pathname.split("/")[2];
-    let context = useContext(AppContext);
+    const mealId = location.pathname.split("/")[2];
+    const context = useContext(AppContext);
 
     //Check if has mealId
     useEffect(() => {

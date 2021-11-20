@@ -17,14 +17,16 @@ import {
 } from "./api/recipies-api";
 import SingleProductContent from "./components/SingleProductContent";
 import {FAVORITES, RECIPIE_CATEGORY_PATH, SINGLE_RECIPIE_PATH} from "./api/config";
-import {Route, useHistory, withRouter} from "react-router-dom";
-
-
+import {Route, Switch, useHistory, withRouter, matchPath} from "react-router-dom";
 
 function App() {
   const [mealsListBySearch, setMealsListBySearch] = useState([]);
   const [mealsListByDefault, setMealsListByDefault] = useState([]);
   const [showCategoryProducts, setShowCategoryProducts] = useState({category: '', status: false});
+  const { location } = useHistory();
+  //Check if current pathname is matched or with '/category', or '/recipie/'
+  const matchedRoute = matchPath(location.pathname, [RECIPIE_CATEGORY_PATH]);
+  const { path } = matchedRoute ?? {};
 
   useEffect(() => {
       //Fill list of Default meal if mealsListBySearch is empty
@@ -32,9 +34,18 @@ function App() {
           getMealByRandom().then((meal) => setMealsListByDefault([...mealsListByDefault, meal])) ;
       }
   },[mealsListByDefault, mealsListBySearch]);
-    //console.log(useHistory())
 
-    //get MealsList By Search
+  useEffect(() => {
+      if(!path) {
+          return;
+      }
+      if(path === RECIPIE_CATEGORY_PATH) {
+          const categoryName = location.pathname.split('/').slice(-1);
+          getCategoryList(...categoryName);
+      }
+  }, [path]);
+
+  //get MealsList By Search
     const getMealsBySearch = (recipeName) => {
         searchMealsByName(recipeName)
         .then((meals) => {
@@ -53,11 +64,10 @@ function App() {
   };
 
     //get Favorites Meals
-   const getFavoritesMealsList = () => {
+    const getFavoritesMealsList = () => {
        setMealsListBySearch([...getProductFromLocalStorage(FAVORITES)]);
        setShowCategoryProducts({category: "Favorites Meals", status: true});
    }
-    //console.log(mealsListBySearch);
 
   return (
     <div className="App">
@@ -75,18 +85,20 @@ function App() {
             <Header/>
             {/*{Show meals by categories}*/}
             <TopProductItemsWrapper />
-            {/*//Show by default ContentProductItemsWrapper with a list of the products*/}
-            <Route exact path="/" render={() => <ContentProductItemsWrapper
-                                                meals={mealsListBySearch.length > 0 ? mealsListBySearch : mealsListByDefault}
-                                                showCategoryTitle={showCategoryProducts.status}
-                                                categoryTitle={showCategoryProducts.category}
-            />}/>
-            <Route exact path={`${RECIPIE_CATEGORY_PATH}:name`} render={() => <ContentProductItemsWrapper
-                                                                meals={mealsListBySearch}
-                                                                showCategoryTitle={showCategoryProducts.status}
-                                                                categoryTitle={showCategoryProducts.category}
-            />}/>
-            <Route exact path={`${SINGLE_RECIPIE_PATH}:id`} component={SingleProductContent}/>
+            <Switch>
+                {/*//Show by default ContentProductItemsWrapper with a list of the products*/}
+                <Route exact path="/" render={() => <ContentProductItemsWrapper
+                                                    meals={mealsListBySearch.length > 0 ? mealsListBySearch : mealsListByDefault}
+                                                    showCategoryTitle={showCategoryProducts.status}
+                                                    categoryTitle={showCategoryProducts.category}
+                />}/>
+                <Route exact path={`${RECIPIE_CATEGORY_PATH}:name`} render={() => <ContentProductItemsWrapper
+                                                                    meals={mealsListBySearch}
+                                                                    showCategoryTitle={showCategoryProducts.status}
+                                                                    categoryTitle={showCategoryProducts.category}
+                />}/>
+                <Route exact path={`${SINGLE_RECIPIE_PATH}:id`} component={SingleProductContent}/>
+            </Switch>
         </AppContext.Provider>
     </div>
   );

@@ -88,12 +88,14 @@ function App() {
             <Switch>
                 {/*//Show by default ContentProductItemsWrapper with a list of the products*/}
                 <Route exact path="/" render={() => <ContentProductItemsWrapper
-                                                    meals={mealsListBySearch.length > 0 ? mealsListBySearch : mealsListByDefault}
+                                                    meals={mealsListBySearch}
+                                                    defaultMeals={mealsListByDefault}
                                                     showCategoryTitle={showCategoryProducts.status}
                                                     categoryTitle={showCategoryProducts.category}
                 />}/>
                 <Route exact path={`${RECIPIE_CATEGORY_PATH}:name`} render={() => <ContentProductItemsWrapper
                                                                     meals={mealsListBySearch}
+                                                                    defaultMeals={mealsListByDefault}
                                                                     showCategoryTitle={showCategoryProducts.status}
                                                                     categoryTitle={showCategoryProducts.category}
                 />}/>

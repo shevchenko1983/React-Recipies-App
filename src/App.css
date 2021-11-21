@@ -7,12 +7,14 @@
   border-radius: 10px;
   box-shadow: 0 0 5px 3px #c571b76b;
   flex-basis: 100%;
+  min-height: 100vh;
 }
+
 #root{
   /*height: 100vh;*/
   display: flex;
   align-content: center;
-  padding: 50px 0px;
+  padding: 50px 0;
 }
 .App-link {
   color: #61dafb;

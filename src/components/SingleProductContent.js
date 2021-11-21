@@ -6,10 +6,16 @@ import {AppContext, getProductFromLocalStorage} from "../api/context";
 import ContentText from "./ContentText";
 import {NavLink} from "react-router-dom";
 import {GiHeartWings} from "react-icons/gi";
+import Loader from './shared-components/Loader';
 import {AiOutlineHeart} from "react-icons/ai";
 import {FAVORITES} from "../api/config";
 
 const SingleProductWrapper = styled('div')`
+    
+    & svg {
+      transform: translateY(250px);
+    }
+    
     & .product_options{
         padding: 0px 15px;
         display: flex; 
@@ -139,6 +145,8 @@ const SingleProductContent = () => {
 
     return(
         <SingleProductWrapper>
+            {!mealImage ? <Loader/>
+                :
                 <>
                     <h2>{mealTitle}</h2>
                     <div className="product_options">
@@ -172,6 +180,7 @@ const SingleProductContent = () => {
                     <h3>How to do it?!...</h3>
                     <ContentText text={instructions}/>
                 </>
+            }
         </SingleProductWrapper>
     );
 }

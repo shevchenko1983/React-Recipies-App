@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import ContentProductItem from "./ContentProductItem";
 import Loader from "./shared-components/Loader";
@@ -25,17 +25,14 @@ const ProductItemsWrapper = styled('div')`
     }
 `;
 
-const ContentProductItemsWrapper = ({meals, defaultMeals, showCategoryTitle, categoryTitle}) => {
+const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
 
     if(!meals || !Object.values(meals?.[0] ?? [])?.[0]) {
-        return <h3>No Results...</h3>
-    }
-
-    if(!defaultMeals || !Object.values(defaultMeals?.[0] ?? [])?.[0]) {
+        // return <h3>No Results...</h3>
         return <div style={{transform: `translateY(250px)`}}><Loader/></div>
     }
 
-    const mealsArr = [...meals, ...defaultMeals].map((item) => {
+    const mealsArr = meals.map((item) => {
        return item.meals ? item.meals : item
     });
 

@@ -12,6 +12,7 @@ export const PRODUCTION_URL = 'https://shevchenko1983.github.io/React-Recipies-A
 //App Routing
 export const SINGLE_RECIPIE_PATH = '/recipie/';
 export const RECIPIE_CATEGORY_PATH = "/category/";
+export const RECIPIE_FAVOURITE_PATH = "/favourite";
 
 //Keys in LocalStorage
 export const FAVORITES = 'favoriteMeals';

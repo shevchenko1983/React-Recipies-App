@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React  from 'react';
 import styled from 'styled-components';
 import ContentProductItem from "./ContentProductItem";
 import Loader from "./shared-components/Loader";
@@ -43,7 +43,7 @@ const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) =
             <h3>{title}</h3>
             <div className="content-products__item">
                 {mealsArr.flat().map((item, index) => {
-                    return <ContentProductItem product={item} key={index}/>
+                    return <ContentProductItem key={index} product={item} />
                 }) ?? null}
             </div>
         </ProductItemsWrapper>

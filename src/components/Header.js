@@ -4,6 +4,7 @@ import SearchInput from "./SearchInput";
 import {RiUserStarFill} from 'react-icons/ri';
 import {AppContext} from "../api/context";
 import {NavLink} from "react-router-dom";
+import {RECIPIE_FAVOURITE_PATH} from "../api/config";
 
 const HeaderWrapper = styled('div')`
     padding: 10px 20px;
@@ -28,7 +29,7 @@ const Header = () => {
     return(
         <HeaderWrapper className={"header"}>
             <SearchInput/>
-            <NavLink to={{pathname: "/"}}>
+            <NavLink to={{pathname: RECIPIE_FAVOURITE_PATH}}>
                <RiUserStarFill className={"favorite-icon"}
                                 onClick={() => context.getFavoritesMealsList()}
                 />

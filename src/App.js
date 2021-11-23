@@ -16,7 +16,7 @@ import {
     searchMealsByName
 } from "./api/recipies-api";
 import SingleProductContent from "./components/SingleProductContent";
-import {FAVORITES, RECIPIE_CATEGORY_PATH, SINGLE_RECIPIE_PATH} from "./api/config";
+import {FAVORITES, RECIPIE_CATEGORY_PATH, SINGLE_RECIPIE_PATH, RECIPIE_FAVOURITE_PATH} from "./api/config";
 import {Route, Switch, useHistory, withRouter, matchPath} from "react-router-dom";
 
 function App() {
@@ -25,7 +25,7 @@ function App() {
   const [showCategoryProducts, setShowCategoryProducts] = useState({category: '', status: false});
   const { location } = useHistory();
   //Check if current pathname is matched or with '/category', or '/recipie/'
-  const matchedRoute = matchPath(location.pathname, [RECIPIE_CATEGORY_PATH]);
+  const matchedRoute = matchPath(location.pathname, [RECIPIE_CATEGORY_PATH, RECIPIE_FAVOURITE_PATH]);
   const { path } = matchedRoute ?? {};
 
   useEffect(() => {
@@ -42,6 +42,9 @@ function App() {
       if(path === RECIPIE_CATEGORY_PATH) {
           const categoryName = location.pathname.split('/').slice(-1);
           getCategoryList(...categoryName);
+      }
+      if(path === RECIPIE_FAVOURITE_PATH) {
+          getFavoritesMealsList();
       }
   }, [path]);
 
@@ -96,6 +99,11 @@ function App() {
                                                                     meals={mealsListBySearch}
                                                                     showCategoryTitle={showCategoryProducts.status}
                                                                     categoryTitle={showCategoryProducts.category}
+                />}/>
+                <Route exact path={RECIPIE_FAVOURITE_PATH}  render={() => <ContentProductItemsWrapper
+                                                            meals={mealsListBySearch}
+                                                            showCategoryTitle={showCategoryProducts.status}
+                                                            categoryTitle={showCategoryProducts.category}
                 />}/>
                 <Route exact path={`${SINGLE_RECIPIE_PATH}:id`} component={SingleProductContent}/>
             </Switch>

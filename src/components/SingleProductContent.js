@@ -53,6 +53,7 @@ const SingleProductWrapper = styled('div')`
                 color: #f17979;
                 cursor: pointer;
                 font-size: 18px;
+                transform: translateY(0px);
                     
                 &:hover{
                   transform: scale(1.3);
@@ -135,6 +136,16 @@ const SingleProductContent = () => {
         return <div/>
     }
 
+    const onRemoveFavoriteMeal = () => {
+        context.onRemoveProductFromFavorites(...currMeal);
+        setIsFavoriteMeal(false);
+    }
+
+    const onAddFavoriteMeal = () => {
+        context.onSendProductToFavorites(...currMeal);
+        setIsFavoriteMeal(true);
+    }
+
     const {
         mealTitle,
         mealImage,
@@ -154,11 +165,11 @@ const SingleProductContent = () => {
                         <div className="product-item__image-panel">
                             {isFavoriteMeal ?
                                 <GiHeartWings
-                                    onClick={() => setIsFavoriteMeal(!context.onRemoveProductFromFavorites(...currMeal))}
+                                    onClick={onRemoveFavoriteMeal}
                                 />
                                 :
                                 <AiOutlineHeart
-                                    onClick={() => setIsFavoriteMeal(context.onSendProductToFavorites(...currMeal))}
+                                    onClick={onAddFavoriteMeal}
                                 />
                             }
                         </div>

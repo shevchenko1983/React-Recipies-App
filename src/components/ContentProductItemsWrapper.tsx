@@ -2,6 +2,13 @@ import React  from 'react';
 import styled from 'styled-components';
 import ContentProductItem from "./ContentProductItem";
 import Loader from "./shared-components/Loader";
+import {SingleMealT} from "../api/context";
+
+type PropsT = {
+    meals: Array<SingleMealT>,
+    showCategoryTitle: boolean,
+    categoryTitle?: string
+}
 
 const ProductItemsWrapper = styled('div')`
     padding: 20px;
@@ -25,7 +32,7 @@ const ProductItemsWrapper = styled('div')`
     }
 `;
 
-const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) => {
+const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}: PropsT) => {
 
     if(!meals || !Object.values(meals?.[0] ?? [])?.[0]) {
         // return <h3>No Results...</h3>
@@ -42,7 +49,7 @@ const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}) =
         <ProductItemsWrapper>
             <h3>{title}</h3>
             <div className="content-products__item">
-                {mealsArr.flat().map((item, index) => {
+                {mealsArr.flat().map((item: FlatArray<any, number>, index: number) => {
                     return <ContentProductItem key={index} product={item} />
                 }) ?? null}
             </div>

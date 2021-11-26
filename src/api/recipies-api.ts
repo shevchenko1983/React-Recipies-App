@@ -7,11 +7,11 @@ import {
 } from "./config";
 
 //get Meal be searching
-export const searchMealsByName = async (searchValue) => {
+export const searchMealsByName = async (searchValue: string) => {
     try{
         const response = await fetch(SEARCH_MEALS_BY_NAME + searchValue);
         return await response.json();
-    }catch (e) {
+    }catch (e: any) {
         console.error(e.message);
     }
 }
@@ -21,27 +21,27 @@ export const getMealByRandom = async () => {
     try{
         const response = await fetch(GET_MEAL_BY_RANDOM);
         return await response.json();
-    }catch (e) {
+    }catch (e: any) {
         console.error(e.message);
     }
 }
 
 //get Meal By Id
-export const getMealById = async (mealId) => {
+export const getMealById = async (mealId: string) => {
     try{
         const response = await fetch(GET_MEAL_BY_ID + mealId);
         return await response.json();
-    }catch (e) {
+    }catch (e: any) {
         console.error(e.message);
     }
 }
 
 //get Category Meals List By Category Name
-export const getCategoryMealsListByCategoryName = async (categoryName) => {
+export const getCategoryMealsListByCategoryName = async (categoryName: string) => {
     try{
         const response = await fetch(GET_CATEGORY_MEALS_LIST_BY_CATEGORY_NAME + categoryName);
         return await response.json();
-    }catch (e) {
+    }catch (e: any) {
         console.error(e.message);
     }
 }
@@ -51,7 +51,7 @@ export const getAllCategoriesMeals = async () => {
     try{
         const response = await fetch(GET_ALL_CATEGORIES_MEALS_LIST);
         return await response.json();
-    }catch (e) {
+    }catch (e: any) {
         console.error(e.message);
     }
 }

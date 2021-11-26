@@ -1,9 +1,13 @@
 import React, {useContext} from 'react';
 import styled from "styled-components";
 import {NavLink} from "react-router-dom";
-import {AppContext} from "../../api/context";
+import {AppContext, SingleMealT} from "../../api/context";
 import Tooltip from "rc-tooltip/lib/Tooltip";
 import {RECIPIE_CATEGORY_PATH} from "../../api/config";
+
+type ProductItemT = {
+    product: SingleMealT
+}
 
 const Item = styled('div')`
     width: 75px;
@@ -32,7 +36,7 @@ const Item = styled('div')`
     }
 `;
 
-const TopProductItem = ({product}) => {
+const TopProductItem = ({product}: ProductItemT) => {
     const context = useContext(AppContext);
 
     if(!product){

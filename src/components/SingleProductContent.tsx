@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import {useHistory} from "react-router";
 import {getMealById} from "../api/recipies-api";
 import styled from 'styled-components';
-import {AppContext, getProductFromLocalStorage} from "../api/context";
+import {AppContext, getProductFromLocalStorage, ParseSingleMealDataT, SingleMealT} from "../api/context";
 import ContentText from "./ContentText";
 import {NavLink} from "react-router-dom";
 import {GiHeartWings} from "react-icons/gi";
@@ -100,13 +100,16 @@ const SingleProductWrapper = styled('div')`
    }
 `;
 
+const initialParsedDataState = {} as ParseSingleMealDataT;
+
 const SingleProductContent = () => {
-    const [currMeal, setCurrMeal] = useState([]);
-    const [parsedData, setParsedData] = useState({});
-    const [isFavoriteMeal, setIsFavoriteMeal] = useState(false);
+    const [currMeal, setCurrMeal] = useState<Array<SingleMealT>>([]);
+    const [parsedData, setParsedData] = useState<ParseSingleMealDataT | null>(initialParsedDataState);
+    const [isFavoriteMeal, setIsFavoriteMeal] = useState<boolean>(false);
     const { location } = useHistory();
     const mealId = location.pathname.split("/")[2];
     const context = useContext(AppContext);
+    const [currentMeal] = [...currMeal];
 
     //Check if has mealId
     useEffect(() => {
@@ -118,15 +121,15 @@ const SingleProductContent = () => {
 
     //check if currMeal is not empty
     useEffect(() => {
-        if(!currMeal.length){
+        if(!currMeal){
             return;
         }
         setParsedData(context.parseSingleMealData(currMeal[0]));
-    },[currMeal.length]);
+    },[context, currMeal]);
 
     //check if favorite Meal is unique
     useEffect(() => {
-        if(getProductFromLocalStorage(FAVORITES)?.some((item) => item.idMeal === mealId)){
+        if(getProductFromLocalStorage(FAVORITES)?.some((item: SingleMealT) => item.idMeal === mealId)){
             return setIsFavoriteMeal(true);
         }
         return setIsFavoriteMeal(false);
@@ -137,12 +140,12 @@ const SingleProductContent = () => {
     }
 
     const onRemoveFavoriteMeal = () => {
-        context.onRemoveProductFromFavorites(...currMeal);
+        context.onRemoveProductFromFavorites(currentMeal);
         setIsFavoriteMeal(false);
     }
 
     const onAddFavoriteMeal = () => {
-        context.onSendProductToFavorites(...currMeal);
+        context.onSendProductToFavorites(currentMeal);
         setIsFavoriteMeal(true);
     }
 

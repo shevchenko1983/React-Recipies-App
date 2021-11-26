@@ -2,6 +2,7 @@ import React, {memo, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {getAllCategoriesMeals} from "../../api/recipies-api";
 import TopProductItem from "./TopProductItem";
+import {SingleMealT} from "../../api/context";
 
 const ProductItemsWrapper = styled('div')`
     padding: 20px 0px;
@@ -19,8 +20,8 @@ const ProductItemsWrapper = styled('div')`
 `;
 
 const TopProductItemsWrapper = () => {
-    const [categoriesList, setCategoriesList] = useState([]);
-    const meals = Object.values(categoriesList)[0];
+    const [categoriesList, setCategoriesList] = useState<Array<SingleMealT>>([]);
+    const meals = Object.values(categoriesList).flat() ?? [];
 
     useEffect(() => {
         //each time call API for getting All Meals Categories
@@ -29,7 +30,7 @@ const TopProductItemsWrapper = () => {
 
     return(
         <ProductItemsWrapper className={'top-products__item'}>
-            {meals && meals.map((item, index) => <TopProductItem key={index} product={item}/>)}
+            {meals.map((item: SingleMealT, index: number) => <TopProductItem key={index} product={item}/>)}
         </ProductItemsWrapper>
     );
 };

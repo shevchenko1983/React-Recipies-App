@@ -6,8 +6,9 @@ import {
     getProductFromLocalStorage,
     onSendProductToFavorites,
     onRemoveProductFromFavorites,
-    parseSingleMealData
+    parseSingleMealData,
 } from "./api/context";
+import { SingleMealT } from './api/context';
 import React, {useEffect, useState} from "react";
 import ContentProductItemsWrapper from "./components/ContentProductItemsWrapper";
 import {
@@ -19,10 +20,15 @@ import SingleProductContent from "./components/SingleProductContent";
 import {FAVORITES, RECIPIE_CATEGORY_PATH, SINGLE_RECIPIE_PATH, RECIPIE_FAVOURITE_PATH} from "./api/config";
 import {Route, Switch, useHistory, withRouter, matchPath} from "react-router-dom";
 
+type CategoryProductT = {
+    category?: string,
+    status: boolean
+}
+
 function App() {
-  const [mealsListBySearch, setMealsListBySearch] = useState([]);
-  const [mealsListByDefault, setMealsListByDefault] = useState([]);
-  const [showCategoryProducts, setShowCategoryProducts] = useState({category: '', status: false});
+  const [mealsListBySearch, setMealsListBySearch] = useState<Array<SingleMealT>>([]);
+  const [mealsListByDefault, setMealsListByDefault] = useState<Array<SingleMealT>>([]);
+  const [showCategoryProducts, setShowCategoryProducts] = useState<CategoryProductT>({category: '', status: false});
   const { location } = useHistory();
   //Check if current pathname is matched or with '/category', or '/recipie/'
   const matchedRoute = matchPath(location.pathname, [RECIPIE_CATEGORY_PATH, RECIPIE_FAVOURITE_PATH]);
@@ -41,15 +47,22 @@ function App() {
       }
       if(path === RECIPIE_CATEGORY_PATH) {
           const categoryName = location.pathname.split('/').slice(-1);
-          getCategoryList(...categoryName);
+          if(!categoryName){
+              return;
+          }
+          const [category] = categoryName;
+          getCategoryList(category);
       }
       if(path === RECIPIE_FAVOURITE_PATH) {
           getFavoritesMealsList();
       }
-  }, [path]);
+  }, [path, location.pathname]);
 
   //get MealsList By Search
-    const getMealsBySearch = (recipeName) => {
+    const getMealsBySearch = (recipeName: string | null) => {
+        if(!recipeName) {
+            return;
+        }
         searchMealsByName(recipeName)
         .then((meals) => {
             setMealsListBySearch([meals]);
@@ -58,7 +71,10 @@ function App() {
     };
 
    //get Category MealsList
-  const getCategoryList = (categoryName) => {
+  const getCategoryList = (categoryName: string | null) => {
+      if(!categoryName) {
+          return;
+      }
       getCategoryMealsListByCategoryName(categoryName)
       .then((meal) => {
           setMealsListBySearch([meal]);

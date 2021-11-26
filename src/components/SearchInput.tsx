@@ -82,7 +82,7 @@ const SearchInput = () => {
             return;
         }
         context.getMealsBySearch(recipeName);
-    },[recipeName]);
+    },[recipeName, context]);
 
     return(
         <SearchWrapper className={"search"}>

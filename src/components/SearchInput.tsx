@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useContext, useEffect, useState} from "react";
+import {useContext, useState} from "react";
 import {BiSearchAlt2} from 'react-icons/bi';
 import {AppContext} from "../api/context";
 import {NavLink} from "react-router-dom";
@@ -74,15 +74,21 @@ const SubmitInput = styled('div')`
 
 const SearchInput = () => {
     const [searchValue, setSearchValue] = useState("");
-    const [recipeName, setRecipeName] = useState("");
     const context = useContext(AppContext);
 
-    useEffect(() => {
-        if(!recipeName){
+    const onChangeInput = (value: string) => {
+        if(!value){
             return;
         }
-        context.getMealsBySearch(recipeName);
-    },[recipeName, context]);
+        setSearchValue(value)
+    }
+
+    const getMealsBySearch = () => {
+        if(!searchValue){
+            return;
+        }
+        context.getMealsBySearch(searchValue);
+    }
 
     return(
         <SearchWrapper className={"search"}>
@@ -90,11 +96,11 @@ const SearchInput = () => {
                 type={"text"}
                 placeholder={"Search some recipie..."}
                 value={searchValue}
-                onChange={(e) => setSearchValue(e.target.value)}
+                onChange={(e) => onChangeInput(e.target.value)}
             />
             <SubmitInput>
                 <NavLink to={{pathname: "/"}}>
-                    <BiSearchAlt2 onClick={() => setRecipeName(searchValue)}/>
+                    <BiSearchAlt2 onClick={getMealsBySearch}/>
                 </NavLink>
             </SubmitInput>
         </SearchWrapper>

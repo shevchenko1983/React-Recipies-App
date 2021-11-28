@@ -97,7 +97,7 @@ const SearchInput = () => {
             />
             <SubmitInput>
                 <NavLink to={{pathname: "/"}}>
-                    <BiSearchAlt2 onClick={getMealsBySearch}/>
+                    <BiSearchAlt2 data-testid="search-button" onClick={getMealsBySearch}/>
                 </NavLink>
             </SubmitInput>
         </SearchWrapper>

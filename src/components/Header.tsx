@@ -29,10 +29,8 @@ const Header = () => {
     return(
         <HeaderWrapper className={"header"}>
             <SearchInput/>
-            <NavLink to={{pathname: RECIPIE_FAVOURITE_PATH}}>
-               <RiUserStarFill className={"favorite-icon"}
-                                onClick={() => context.getFavoritesMealsList()}
-                />
+            <NavLink to={{pathname: RECIPIE_FAVOURITE_PATH}} data-testid="favorite-meals-link" onClick={context.getFavoritesMealsList}>
+               <RiUserStarFill className={"favorite-icon"} />
             </NavLink>
         </HeaderWrapper>
     );

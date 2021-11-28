@@ -77,9 +77,6 @@ const SearchInput = () => {
     const context = useContext(AppContext);
 
     const onChangeInput = (value: string) => {
-        if(!value){
-            return;
-        }
         setSearchValue(value)
     }
 

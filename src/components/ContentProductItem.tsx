@@ -125,10 +125,12 @@ const ContentProductItem = ({product}: ProductT) => {
               <div className="product-item__image-panel">
                   {isFavorite ?
                       <GiHeartWings
+                          data-testid="favorite-icon"
                           onClick={onRemoveFavoriteMeal}
                       />
                       :
                       <AiOutlineHeart
+                          data-testid="not-favorite-icon"
                           onClick={onAddFavoriteMeal}
                       />
                   }

@@ -162,21 +162,23 @@ const SingleProductContent = () => {
             {!mealImage ? <Loader/>
                 :
                 <>
-                    <h2>{mealTitle}</h2>
+                    <h2 className="product_title">{mealTitle}</h2>
                     <div className="product_options">
                         <img src={mealImage} alt=""/>
                         <div className="product-item__image-panel">
                             {isFavoriteMeal ?
                                 <GiHeartWings
+                                    data-testid="favorite-icon"
                                     onClick={onRemoveFavoriteMeal}
                                 />
                                 :
                                 <AiOutlineHeart
+                                    data-testid="not-favorite-icon"
                                     onClick={onAddFavoriteMeal}
                                 />
                             }
                         </div>
-                        <NavLink className={"product_category"}
+                        <NavLink className="product_category"
                                  onClick={() => context.getCategoryList(categoryMeal)}
                                  to={{
                                      pathname: "/"

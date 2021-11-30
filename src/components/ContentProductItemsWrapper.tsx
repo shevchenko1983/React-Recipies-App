@@ -36,7 +36,7 @@ const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}: P
 
     if(!meals || !Object.values(meals?.[0] ?? [])?.[0]) {
         // return <h3>No Results...</h3>
-        return <div style={{transform: `translateY(250px)`}}><Loader/></div>
+        return <div style={{transform: `translateY(250px)`}} data-testid='loader'><Loader /></div>
     }
 
     const mealsArr = meals.map((item) => {
@@ -48,7 +48,7 @@ const ContentProductItemsWrapper = ({meals, showCategoryTitle, categoryTitle}: P
     return(
         <ProductItemsWrapper>
             <h3>{title}</h3>
-            <div className="content-products__item">
+            <div className="content-products__item" data-testid='products-wrapper'>
                 {mealsArr.flat().map((item: FlatArray<any, number>, index: number) => {
                     return <ContentProductItem key={index} product={item} />
                 }) ?? null}
